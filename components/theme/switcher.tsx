@@ -21,8 +21,6 @@ export function ThemeSwitcher({ className }: Props) {
 		setTheme(value)
 	}
 
-	console.log({ theme })
-
 	return (
 		<Select
 			onValueChange={handleThemeOnChange}
