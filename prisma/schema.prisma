@@ -1,0 +1,141 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  channels      Channel[]
+  sessions      Session[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model Channel {
+  id           String      @id @default(cuid())
+  name         String
+  description  String
+  slug         String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  userId       String
+  saveMessages Boolean     @default(false)
+  auth         Auth[]
+  blacklist    Blacklist[]
+  User         User        @relation(fields: [userId], references: [id])
+  messages     Message[]
+  metrics      Metric[]
+  requests     Request[]
+
+  @@unique([slug, id])
+  @@map("channels")
+}
+
+model Auth {
+  id        String    @id @default(cuid())
+  token     String
+  expires   DateTime?
+  channelId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  channel   Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
+}
+
+model Blacklist {
+  id        String   @id @default(cuid())
+  host      String
+  channelId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@unique([host, channelId])
+  @@map("blacklist")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  channelId String
+  size      Int
+  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model Request {
+  id         String   @id @default(cuid())
+  origin     String
+  channelId  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  authorized Boolean
+  latency    Float    @default(0)
+  userAgent  String
+  address    String
+  channel    Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("requests")
+}
+
+model Metric {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  channelId String
+  event     String
+  latency   Int
+  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("metrics")
+}
