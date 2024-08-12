@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { object, string, InferInput } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { TriangleAlert } from 'lucide-react'
-
+import { updateAccount } from '~actions/account'
 const schema = object({
 	username: string(),
 	email: string(),
@@ -33,13 +33,22 @@ export function GeneralForm({ defaultValues }: Props) {
 	})
 
 	const {
-		formState: { isDirty },
+		formState: { isDirty, isSubmitting },
 		reset,
+		handleSubmit,
 	} = form
+
+	const handleFormSubmit = async (data: FormValues) => {
+		await updateAccount(data)
+	}
 
 	return (
 		<Form {...form}>
-			<form autoComplete='off' method='POST'>
+			<form
+				autoComplete='off'
+				method='POST'
+				onSubmit={handleSubmit(handleFormSubmit)}
+			>
 				<div className='px-6 py-4 grid'>
 					<FormField
 						control={form.control}
@@ -90,7 +99,7 @@ export function GeneralForm({ defaultValues }: Props) {
 					<Button
 						variant='outline'
 						size='xs'
-						disabled={!isDirty}
+						disabled={!isDirty || isSubmitting}
 						onClick={() => reset()}
 					>
 						Cancel
@@ -99,7 +108,7 @@ export function GeneralForm({ defaultValues }: Props) {
 						type='submit'
 						variant='secondary'
 						size='xs'
-						disabled={!isDirty}
+						disabled={!isDirty || isSubmitting}
 					>
 						Save
 					</Button>
