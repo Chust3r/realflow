@@ -1,13 +1,7 @@
-import React from 'react'
+import { InConstruction } from '~components/dashboard/inConstruction'
 
 function Page() {
-	return (
-		<div className='w-full h-full grid place-content-center'>
-			<h1 className='text-5xl text-muted font-bold'>
-				account &gt; tokens
-			</h1>
-		</div>
-	)
+	return <InConstruction />
 }
 
 export default Page
