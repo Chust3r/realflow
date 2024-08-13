@@ -4,7 +4,7 @@ const nextConfig = {
 		return [
 			{
 				source: '/dashboard',
-				destination: '/dashboard/channels',
+				destination: '/dashboard/rooms',
 				permanent: true,
 			},
 		]

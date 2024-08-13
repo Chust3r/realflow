@@ -8,19 +8,19 @@ import {
 	DialogTitle,
 } from '~ui/dialog'
 import { Button } from '../ui/button'
-import { useChannelStore, setChannelStore } from '~stores/channel'
+import { useRoomStore, setRoomStore } from '~stores/room'
 
 interface Props {
 	reset: () => void
 }
 
 export function ConfirmDialog({ reset }: Props) {
-	const { confirmOpen } = useChannelStore()
+	const { confirmOpen } = useRoomStore()
 
 	return (
 		<Dialog
 			open={confirmOpen}
-			onOpenChange={(open) => setChannelStore({ confirmOpen: open })}
+			onOpenChange={(open) => setRoomStore({ confirmOpen: open })}
 		>
 			<DialogContent className='sm:max-w-[380px]'>
 				<DialogHeader className='flex flex-col gap-1.5 text-center sm:text-left py-4 px-5 border-b justify-center'>
@@ -36,7 +36,7 @@ export function ConfirmDialog({ reset }: Props) {
 					<Button
 						className='w-full'
 						variant='outline'
-						onClick={() => setChannelStore({ confirmOpen: false })}
+						onClick={() => setRoomStore({ confirmOpen: false })}
 					>
 						Cancel
 					</Button>
@@ -44,7 +44,7 @@ export function ConfirmDialog({ reset }: Props) {
 						className='w-full'
 						variant='secondary'
 						onClick={() => {
-							setChannelStore({
+							setRoomStore({
 								confirmOpen: false,
 								open: false,
 								confirm: true,

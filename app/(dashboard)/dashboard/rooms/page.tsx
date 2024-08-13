@@ -1,4 +1,4 @@
-import { NoChannels } from '~/components/dashboard/channels/noChannels'
+import { NoRooms } from '~components/dashboard/rooms/noRooms'
 import { ShowForm } from '~components/dashboard/showForm'
 
 function Page() {
@@ -6,14 +6,14 @@ function Page() {
 		<div className='w-full h-full flex flex-col gap-3'>
 			<div>
 				<ShowForm size='xs' variant='secondary'>
-					New channel
+					New room
 				</ShowForm>
 			</div>
 			<h4 className='text-lg text-foreground font-medium tracking-tight'>
-				Channels
+				Rooms
 			</h4>
 			<section className='flex-1 flex-grow'>
-				<NoChannels />
+				<NoRooms />
 			</section>
 		</div>
 	)

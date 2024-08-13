@@ -1,14 +1,11 @@
 'use client'
 import { Button, ButtonProps } from '~ui/button'
-import { setChannelStore } from '~stores/channel'
+import { setRoomStore } from '~stores/room'
 
 interface Props extends ButtonProps {}
 
 export function ShowForm(props: Props) {
 	return (
-		<Button
-			onClick={() => setChannelStore({ open: true })}
-			{...props}
-		></Button>
+		<Button onClick={() => setRoomStore({ open: true })} {...props}></Button>
 	)
 }

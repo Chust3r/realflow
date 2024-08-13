@@ -25,7 +25,7 @@ import {
 } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ConfirmDialog } from './confirmDialog'
-import { useChannelStore, setChannelStore } from '~/stores/channel'
+import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
 
 //→ FORM SCHEMA
@@ -51,7 +51,7 @@ const defaultValues: FormValues = {
 	webhook: false,
 }
 
-export function CreateChannel() {
+export function CreateRoom() {
 	const form = useForm<FormValues>({
 		resolver: valibotResolver(formSchema),
 		defaultValues,
@@ -62,17 +62,17 @@ export function CreateChannel() {
 		reset,
 	} = form
 
-	const { open } = useChannelStore()
+	const { open } = useRoomStore()
 
 	//→ SHEET HANDLERS
 
 	const handleSheetOpenChange = (value: boolean) => {
 		if (!isDirty && !value) {
-			setChannelStore({ open: false })
+			setRoomStore({ open: false })
 		}
 
 		if (!!isDirty && !value) {
-			setChannelStore({ confirmOpen: true })
+			setRoomStore({ confirmOpen: true })
 		}
 
 		reset()
@@ -88,7 +88,7 @@ export function CreateChannel() {
 			<SheetContent className='p-0 w-[600px] sm:max-w-[600px] flex flex-col'>
 				<div className='border-b px-6 flex items-center h-14'>
 					<SheetTitle className='text-foreground font-medium tracking-tight'>
-						Create a new channel
+						Create a new room
 					</SheetTitle>
 				</div>
 				<ScrollArea className='flex-1 flex-grow'>
@@ -158,11 +158,11 @@ export function CreateChannel() {
 														<p>Authentication</p>
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
-														Enable channel-level authentication,
-														allowing users to secure their
-														channels with tokens or keys. This
-														ensures that only authorized users can
-														connect and interact with the channel.
+														Enable Room-level authentication,
+														allowing users to secure their Rooms
+														with tokens or keys. This ensures that
+														only authorized users can connect and
+														interact with the Room.
 													</span>
 												</FormLabel>
 											</div>
@@ -216,9 +216,9 @@ export function CreateChannel() {
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable webhook support so users can
-														integrate their channels with other
+														integrate their Rooms with other
 														services. When certain events occur in
-														the channel, a webhook can trigger
+														the Room, a webhook can trigger
 														actions in external systems, allowing
 														for more complex workflows and
 														automation.

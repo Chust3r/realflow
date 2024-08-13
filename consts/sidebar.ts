@@ -1,11 +1,11 @@
 export const items = [
 	{
-		title: 'Channels',
+		title: 'Rooms',
 		items: [
 			{
-				title: 'All channels',
-				label: 'Channels',
-				path: '/dashboard/channels',
+				title: 'All rooms',
+				label: 'Rooms',
+				path: '/dashboard/rooms',
 			},
 		],
 	},
