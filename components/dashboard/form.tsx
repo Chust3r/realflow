@@ -14,15 +14,27 @@ import { Input } from '~ui/input'
 import { Checkbox } from '~ui/checkbox'
 import { ScrollArea, ScrollBar } from '~ui/scroll-area'
 import { useForm } from 'react-hook-form'
-import { object, string, optional, boolean, InferInput } from 'valibot'
+import {
+	object,
+	string,
+	optional,
+	boolean,
+	InferInput,
+	minLength,
+	pipe,
+} from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ConfirmDialog } from './confirmDialog'
 import { useChannelStore, setChannelStore } from '~/stores/channel'
+import { Webhook, Database, Lock } from 'lucide-react'
 
 //→ FORM SCHEMA
 
 const formSchema = object({
-	name: string(),
+	name: pipe(
+		string(),
+		minLength(3, 'Name must be at least 3 characters long')
+	),
 	description: optional(string()),
 	authentication: boolean(),
 	messagePersistence: boolean(),
@@ -62,6 +74,12 @@ export function CreateChannel() {
 		if (!!isDirty && !value) {
 			setChannelStore({ confirmOpen: true })
 		}
+
+		reset()
+	}
+
+	const handleSubmit = async (values: FormValues) => {
+		console.log(values)
 	}
 
 	return (
@@ -75,22 +93,26 @@ export function CreateChannel() {
 				</div>
 				<ScrollArea className='flex-1 flex-grow'>
 					<Form {...form}>
-						<form className='flex flex-col ' autoComplete='off'>
+						<form
+							className='flex flex-col '
+							autoComplete='off'
+							onSubmit={form.handleSubmit(handleSubmit)}
+						>
 							<div className='border-b px-6 py-7 space-y-10'>
 								<FormField
 									control={form.control}
 									name='name'
 									render={({ field }) => (
 										<FormItem>
-											<div className='flex items-center'>
-												<FormLabel className='min-w-[200px] text-muted-foreground text-sm'>
+											<div className='grid grid-cols-12 items-center gap-x-2 gap-y-1'>
+												<FormLabel className='col-span-4 text-muted-foreground text-sm'>
 													Name
 												</FormLabel>
-												<FormControl>
+												<FormControl className='col-span-8'>
 													<Input {...field} />
 												</FormControl>
-												<FormDescription></FormDescription>
-												<FormMessage />
+
+												<FormMessage className='col-start-5 col-end-12 text-muted-foreground text-xs' />
 											</div>
 										</FormItem>
 									)}
@@ -100,18 +122,18 @@ export function CreateChannel() {
 									name='description'
 									render={({ field }) => (
 										<FormItem>
-											<div className='flex items-center'>
-												<FormLabel className='min-w-[200px] text-muted-foreground text-sm'>
+											<div className='grid grid-cols-12 items-center gap-x-2 gap-y-1'>
+												<FormLabel className='col-span-4 text-muted-foreground text-sm'>
 													Description
 												</FormLabel>
-												<FormControl>
+												<FormControl className='col-span-8'>
 													<Input
-														placeholder='Optional'
 														{...field}
+														placeholder='Optional'
 													/>
 												</FormControl>
-												<FormDescription></FormDescription>
-												<FormMessage />
+
+												<FormMessage className='col-start-5 col-end-12 text-muted-foreground text-xs' />
 											</div>
 										</FormItem>
 									)}
@@ -123,7 +145,7 @@ export function CreateChannel() {
 									name='authentication'
 									render={({ field }) => (
 										<FormItem>
-											<div className='flex items-start gap-3'>
+											<div className='flex items-center gap-5 h-full flex-row-reverse'>
 												<FormControl>
 													<Checkbox
 														checked={field.value}
@@ -131,7 +153,10 @@ export function CreateChannel() {
 													/>
 												</FormControl>
 												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
-													<p>Authentication</p>
+													<div className='flex items-center gap-2'>
+														<Lock className='w-4 h-4' />
+														<p>Authentication</p>
+													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable channel-level authentication,
 														allowing users to secure their
@@ -149,7 +174,7 @@ export function CreateChannel() {
 									name='messagePersistence'
 									render={({ field }) => (
 										<FormItem>
-											<div className='flex items-start gap-3'>
+											<div className='flex items-center gap-5 h-full flex-row-reverse'>
 												<FormControl>
 													<Checkbox
 														checked={field.value}
@@ -157,7 +182,10 @@ export function CreateChannel() {
 													/>
 												</FormControl>
 												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
-													<p>Message Persistence</p>
+													<div className='flex items-center gap-2'>
+														<Database className='w-4 h-4' />
+														<p>Message Persistence</p>
+													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable this setting to store all
 														communications for future reference,
@@ -174,7 +202,7 @@ export function CreateChannel() {
 									name='webhook'
 									render={({ field }) => (
 										<FormItem>
-											<div className='flex items-start gap-3'>
+											<div className='flex items-center gap-5 h-full flex-row-reverse'>
 												<FormControl>
 													<Checkbox
 														checked={field.value}
@@ -182,7 +210,10 @@ export function CreateChannel() {
 													/>
 												</FormControl>
 												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
-													<p>Webhook Integration</p>
+													<div className='flex items-center gap-2'>
+														<Webhook className='w-4 h-4' />
+														<p>Webhook Integration</p>
+													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable webhook support so users can
 														integrate their channels with other
@@ -212,7 +243,12 @@ export function CreateChannel() {
 						>
 							Cancel
 						</Button>
-						<Button size='xs' variant='secondary'>
+						<Button
+							size='xs'
+							variant='secondary'
+							type='submit'
+							onClick={() => form.handleSubmit(handleSubmit)()}
+						>
 							Save
 						</Button>
 					</div>
