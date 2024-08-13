@@ -1,8 +1,9 @@
 import Link from 'next/link'
+import { RealFlow } from '~icons'
 import { items } from '~consts/sidebar'
-import { LogOut, RealFlow } from '~icons'
 import { Badge } from '~ui/badge'
 import { ScrollArea } from '~ui/scroll-area'
+import { LogOut } from '~components/auth/logOut'
 
 export function Sidebar() {
 	return (
@@ -36,12 +37,7 @@ export function Sidebar() {
 				))}
 			</ScrollArea>
 			<div className='px-6 py-5 border-t'>
-				<div className='flex gap-2 items-center'>
-					<LogOut className='stroke-muted-foreground w-4 h-4' />
-					<span className='text-sm text-muted-foreground font-medium'>
-						Log out
-					</span>
-				</div>
+				<LogOut />
 			</div>
 		</div>
 	)
