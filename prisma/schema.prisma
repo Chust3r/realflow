@@ -44,7 +44,7 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
-  channels      Channel[]
+  rooms         Room[]
   sessions      Session[]
 
   @@map("users")
@@ -59,45 +59,49 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
-model Channel {
-  id           String      @id @default(cuid())
-  name         String
-  description  String
-  slug         String
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  userId       String
-  saveMessages Boolean     @default(false)
-  auth         Auth[]
-  blacklist    Blacklist[]
-  User         User        @relation(fields: [userId], references: [id])
-  messages     Message[]
-  metrics      Metric[]
-  requests     Request[]
+model Room {
+  id                         String      @id @default(cuid())
+  name                       String
+  description                String
+  createdAt                  DateTime    @default(now())
+  updatedAt                  DateTime    @updatedAt
+  userId                     String
+  saveMessages               Boolean     @default(false)
+  enableAuth                 Boolean     @default(false)
+  enableWebHooks             Boolean     @default(false)
+  webhookUrl                 String?
+  maxSimultaneousConnections Int         @default(20)
+  publicKey                  String
+  secretKeys                 SecretKey[]
+  blacklist                  Blacklist[]
+  User                       User        @relation(fields: [userId], references: [id])
+  messages                   Message[]
+  metrics                    Metric[]
+  requests                   Request[]
 
-  @@unique([slug, id])
-  @@map("channels")
+  @@unique([id])
+  @@map("rooms")
 }
 
-model Auth {
+model SecretKey {
   id        String    @id @default(cuid())
-  token     String
+  value     String
   expires   DateTime?
-  channelId String
+  roomId    String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  channel   Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  room      Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
 
 model Blacklist {
   id        String   @id @default(cuid())
   host      String
-  channelId String
+  roomId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
-  @@unique([host, channelId])
+  @@unique([host, roomId])
   @@map("blacklist")
 }
 
@@ -106,9 +110,9 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
-  channelId String
-  size      Int
-  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  roomId    String
+  size      Int      @default(0)
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@map("messages")
 }
@@ -116,26 +120,27 @@ model Message {
 model Request {
   id         String   @id @default(cuid())
   origin     String
-  channelId  String
+  roomId     String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   authorized Boolean
   latency    Float    @default(0)
   userAgent  String
   address    String
-  channel    Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@map("requests")
 }
 
 model Metric {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  channelId String
-  event     String
-  latency   Int
-  channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
-
-  @@map("metrics")
+  id                      String   @id @default(cuid())
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  roomId                  String
+  event                   String
+  latency                 Int
+  activeUsers             Int      @default(0)
+  connections             Int      @default(0)
+  simultaneousConnections Int      @default(0)
+  room                    Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
