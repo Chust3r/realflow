@@ -158,7 +158,7 @@ export function CreateRoom() {
 														<p>Authentication</p>
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
-														Enable Room-level authentication,
+														Enable room-level authentication,
 														allowing users to secure their Rooms
 														with tokens or keys. This ensures that
 														only authorized users can connect and
@@ -216,7 +216,7 @@ export function CreateRoom() {
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable webhook support so users can
-														integrate their Rooms with other
+														integrate their rooms with other
 														services. When certain events occur in
 														the Room, a webhook can trigger
 														actions in external systems, allowing
