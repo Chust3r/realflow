@@ -1,11 +1,11 @@
 import { ShowForm } from '~components/dashboard/showForm'
-import { Plus, Tv } from 'lucide-react'
+import { Plus, Server} from 'lucide-react'
 
 export function NoRooms() {
 	return (
 		<section className='w-full h-full rounded-lg grid place-content-center border bg-accent/10 p-5'>
 			<div className='flex flex-col items-center gap-2'>
-				<Tv className='w-16 h-16 stroke-muted' />
+				<Server className='w-16 h-16 stroke-muted' />
 				<div className='flex flex-col items-center gap-1'>
 					<h5 className='text-foreground font-medium tracking-wide'>
 						No Rooms
