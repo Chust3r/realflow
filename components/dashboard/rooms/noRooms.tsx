@@ -3,7 +3,7 @@ import { Plus, Server} from 'lucide-react'
 
 export function NoRooms() {
 	return (
-		<section className='w-full h-full rounded-lg grid place-content-center border bg-accent/10 p-5'>
+		<section className='w-full h-full grid place-content-center  p-5'>
 			<div className='flex flex-col items-center gap-2'>
 				<Server className='w-16 h-16 stroke-muted' />
 				<div className='flex flex-col items-center gap-1'>

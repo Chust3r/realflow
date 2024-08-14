@@ -27,6 +27,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ConfirmDialog } from './confirmDialog'
 import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
+import { createRoom } from '~actions/room'
 
 //→ FORM SCHEMA
 
@@ -79,7 +80,12 @@ export function CreateRoom() {
 	}
 
 	const handleSubmit = async (values: FormValues) => {
-		console.log(values)
+		const { status } = await createRoom(values)
+
+		//→ DO SOMETHING WITH STATUS
+
+		setRoomStore({ open: false })
+		reset()
 	}
 
 	return (
@@ -159,10 +165,10 @@ export function CreateRoom() {
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable room-level authentication,
-														allowing users to secure their Rooms
+														allowing users to secure their rooms
 														with tokens or keys. This ensures that
 														only authorized users can connect and
-														interact with the Room.
+														interact with the room.
 													</span>
 												</FormLabel>
 											</div>
