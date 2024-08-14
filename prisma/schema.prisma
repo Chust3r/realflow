@@ -62,7 +62,7 @@ model VerificationToken {
 model Room {
   id                         String      @id @default(cuid())
   name                       String
-  description                String
+  description                String?
   createdAt                  DateTime    @default(now())
   updatedAt                  DateTime    @updatedAt
   userId                     String
