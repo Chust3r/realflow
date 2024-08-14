@@ -63,6 +63,7 @@ model Room {
   id                         String      @id @default(cuid())
   name                       String
   description                String?
+  slug                       String
   createdAt                  DateTime    @default(now())
   updatedAt                  DateTime    @updatedAt
   userId                     String
@@ -79,7 +80,7 @@ model Room {
   metrics                    Metric[]
   requests                   Request[]
 
-  @@unique([id])
+  @@unique([id, slug])
   @@map("rooms")
 }
 
