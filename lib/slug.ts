@@ -6,5 +6,5 @@ export const generateSlug = (length = 8) => {
 	for (let i = 0; i < length; i++) {
 		slug += characters.charAt(Math.floor(Math.random() * characters.length))
 	}
-	return slug
+	return slug.toLowerCase()
 }
