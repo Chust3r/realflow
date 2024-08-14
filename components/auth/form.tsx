@@ -3,8 +3,7 @@
 import { Github, Google } from '~icons'
 import { Button } from '~ui/button'
 import { github, google } from '~actions/auth'
-import { Particles } from '~ui/particles'
-import { Separator } from '~ui/separator'
+import { Grid } from '~/components/ui/grid'
 import { RealFlow } from '~icons'
 import { Badge } from '~ui/badge'
 
@@ -17,7 +16,6 @@ export const AuthForm = () => {
 					<h4 className='text-lg truncate font-medium'>RealFlow</h4>
 					<Badge variant='secondary'>beta</Badge>
 				</div>
-				<Separator />
 				<div className='flex flex-col gap-2'>
 					<h1 className='text-2xl tracking-wide font-medium'>
 						Sign up to RealFlow
@@ -41,7 +39,12 @@ export const AuthForm = () => {
 					</Button>
 				</div>
 			</div>
-			<Particles className='absolute inset-0 w-full h-full -z-10' />
+			<Grid
+				strokeDasharray={'4 2'}
+				width={80}
+				height={80}
+				className='[mask-image:radial-gradient(400px_circle_at_center,white,transparent)] inset-x-0 inset-y-[-30%] h-[200%] skew-y-12'
+			/>
 		</section>
 	)
 }
