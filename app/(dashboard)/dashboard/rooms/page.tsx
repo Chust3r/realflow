@@ -1,7 +1,11 @@
-import { NoRooms } from '~components/dashboard/rooms/noRooms'
 import { ShowForm } from '~components/dashboard/showForm'
+import { NoRooms } from '~components/dashboard/rooms/noRooms'
+import { Rooms } from '~components/dashboard/rooms/rooms'
+import { getRooms } from '~lib/rooms'
 
-function Page() {
+async function Page() {
+	const rooms = await getRooms()
+
 	return (
 		<div className='w-full h-full flex flex-col gap-3'>
 			<div>
@@ -13,7 +17,7 @@ function Page() {
 				Rooms
 			</h4>
 			<section className='flex-1 flex-grow'>
-				<NoRooms />
+				{rooms.length === 0 ? <NoRooms /> : <Rooms rooms={rooms} />}
 			</section>
 		</div>
 	)
