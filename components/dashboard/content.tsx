@@ -1,3 +1,5 @@
+import { ScrollArea } from '~ui/scroll-area'
+
 interface Props {
 	children: React.ReactNode
 }
@@ -8,13 +10,13 @@ export function Content({ children }: Props) {
 			<div className='h-12 max-h-12 border-b'>
 				<div className='w-full h-full flex items-center justify-between px-6'>
 					<span className='text-xs text-muted-foreground font-medium'>
-						Channels
+						Rooms
 					</span>
 				</div>
 			</div>
-			<main className='flex-1 flex-grow p-5 overflow-y-auto'>
+			<ScrollArea className='flex-1 flex-grow p-5 overflow-y-auto'>
 				{children}
-			</main>
+			</ScrollArea>
 		</div>
 	)
 }

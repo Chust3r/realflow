@@ -8,6 +8,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '~ui/form'
+import { Avatar, AvatarFallback, AvatarImage } from '~ui/avatar'
 import { Input } from '~ui/input'
 import { Button } from '~ui/button'
 import { useForm } from 'react-hook-form'
@@ -24,9 +25,10 @@ type FormValues = InferInput<typeof schema>
 
 interface Props {
 	defaultValues: FormValues
+	image: string
 }
 
-export function GeneralForm({ defaultValues }: Props) {
+export function GeneralForm({ defaultValues, image }: Props) {
 	const form = useForm({
 		resolver: valibotResolver(schema),
 		defaultValues,
@@ -50,6 +52,12 @@ export function GeneralForm({ defaultValues }: Props) {
 				onSubmit={handleSubmit(handleFormSubmit)}
 			>
 				<div className='px-6 py-4 grid'>
+					<div className='flex justify-center py-2'>
+						<Avatar className='w-24 h-24'>
+							<AvatarImage src={image} />
+							<AvatarFallback>CN</AvatarFallback>
+						</Avatar>
+					</div>
 					<FormField
 						control={form.control}
 						name='username'

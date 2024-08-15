@@ -5,8 +5,6 @@ import { prisma } from '~prisma'
 export const getSession = async () => {
 	const session = await auth()
 
-
-
 	if (!session?.user?.email) redirect('/auth')
 
 	const user = await prisma.user.findUnique({
@@ -14,7 +12,6 @@ export const getSession = async () => {
 			email: session?.user?.email as string,
 		},
 	})
-
 
 	if (!user) redirect('/auth')
 

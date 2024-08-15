@@ -12,3 +12,16 @@ export const getRooms = async () => {
 
 	return rooms
 }
+
+export const getRoomBySlug = async (slug: string) => {
+	const user = await getSession()
+
+	const room = await prisma.room.findFirst({
+		where: {
+			slug,
+			userId: user.id,
+		},
+	})
+
+	return room
+}

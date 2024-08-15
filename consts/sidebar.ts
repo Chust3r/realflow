@@ -1,32 +1,92 @@
+import {
+	Zap,
+	LayoutGrid,
+	Router,
+	Webhook,
+	KeyRound,
+	Settings,
+	Server,
+	ShieldCheck,
+	AppWindowMac,
+	Ticket,
+	UserRound,
+} from 'lucide-react'
+
 export const items = [
 	{
 		title: 'Rooms',
-		items: [
-			{
-				title: 'All rooms',
-				label: 'Rooms',
-				path: '/dashboard/rooms',
-			},
-		],
+		path: '/dashboard/rooms',
+		icon: Server,
 	},
 	{
 		title: 'Account',
-		items: [
-			{
-				title: 'Preferences',
-				label: 'Preferences',
-				path: '/dashboard/account/me',
-			},
-			{
-				title: 'Access tokens',
-				label: 'Access tokens',
-				path: '/dashboard/account/tokens',
-			},
-			{
-				title: 'Security',
-				label: 'Security',
-				path: '/dashboard/account/security',
-			},
-		],
+		path: '/dashboard/account/me',
+		icon: UserRound,
+	},
+	{
+		title: 'Preferences',
+		path: '/dashboard/account/preferences',
+		icon: AppWindowMac,
+	},
+
+	{
+		title: 'Access tokens',
+		path: '/dashboard/account/tokens',
+		icon: Ticket,
+	},
+	{
+		title: 'Security',
+		path: '/dashboard/account/security',
+		icon: ShieldCheck,
 	},
 ]
+
+const roomItems = [
+	{
+		title: 'Overview',
+		path: 'overview',
+		icon: LayoutGrid,
+	},
+	{
+		title: 'Quickstart',
+		path: 'quickstart',
+		icon: Zap,
+	},
+	{
+		title: 'Events',
+		path: 'events',
+		icon: Router,
+	},
+	{
+		title: 'Webhooks',
+		path: 'webhooks',
+		icon: Webhook,
+	},
+	{
+		title: 'API keys',
+		path: 'apikeys',
+		icon: KeyRound,
+	},
+	{
+		title: 'Settings',
+		path: 'settings',
+		icon: Settings,
+	},
+]
+
+const generateRoomItems = (slug: string) => {
+	const items = roomItems.map((item) => ({
+		...item,
+		path: `/dashboard/room/${slug}/${item.path}`,
+	}))
+
+	return items
+}
+
+export const getItems = (type: 'dashboard' | 'rooms', slug = '') => {
+	if (type === 'dashboard') {
+		return items
+	}
+
+	return generateRoomItems(slug)
+}
