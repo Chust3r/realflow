@@ -14,7 +14,7 @@ interface Props {
 
 export async function Rooms({ rooms }: Props) {
 	return (
-		<section className='w-full grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3'>
+		<section className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
 			{rooms.map((room) => (
 				<Link
 					href={`/dashboard/room/${room.slug}`}
@@ -35,7 +35,7 @@ export async function Rooms({ rooms }: Props) {
 					<div className='flex flex-col gap-2 py-3'>
 						<div className='flex gap-2'>
 							<CaseLower className='w-4 h-4 stroke-muted-foreground' />
-							<span className='text-xs text-muted-foreground'>
+							<span className='text-xs text-muted-foreground truncate max-w-[250px]'>
 								{room.description ?? 'No description'}
 							</span>
 						</div>

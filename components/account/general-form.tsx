@@ -55,7 +55,7 @@ export function GeneralForm({ defaultValues, image }: Props) {
 					<div className='flex justify-center py-2'>
 						<Avatar className='w-24 h-24'>
 							<AvatarImage src={image} />
-							<AvatarFallback>CN</AvatarFallback>
+							<AvatarFallback>A</AvatarFallback>
 						</Avatar>
 					</div>
 					<FormField

@@ -1,6 +1,5 @@
 import {
 	Zap,
-	LayoutGrid,
 	Router,
 	Webhook,
 	KeyRound,
@@ -10,6 +9,7 @@ import {
 	AppWindowMac,
 	Ticket,
 	UserRound,
+	House,
 } from 'lucide-react'
 
 export const items = [
@@ -45,7 +45,7 @@ const roomItems = [
 	{
 		title: 'Overview',
 		path: 'overview',
-		icon: LayoutGrid,
+		icon: House,
 	},
 	{
 		title: 'Quickstart',
@@ -90,3 +90,5 @@ export const getItems = (type: 'dashboard' | 'rooms', slug = '') => {
 
 	return generateRoomItems(slug)
 }
+
+export type Items = ReturnType<typeof getItems>
