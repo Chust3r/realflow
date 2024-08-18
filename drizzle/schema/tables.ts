@@ -11,7 +11,7 @@ import { users } from './auth'
 
 export const messages = pgTable('message', {
 	id: text('id')
-		.default(sql`gen_random_uuid()`)
+		.$defaultFn(() => crypto.randomUUID())
 		.primaryKey()
 		.notNull(),
 	createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
@@ -32,7 +32,7 @@ export const messages = pgTable('message', {
 
 export const requests = pgTable('request', {
 	id: text('id')
-		.default(sql`gen_random_uuid()`)
+		.$defaultFn(() => crypto.randomUUID())
 		.primaryKey()
 		.notNull(),
 	origin: text('origin').notNull(),
@@ -58,7 +58,7 @@ export const blacklist = pgTable(
 	'blacklist',
 	{
 		id: text('id')
-			.default(sql`gen_random_uuid()`)
+			.$defaultFn(() => crypto.randomUUID())
 			.primaryKey()
 			.notNull(),
 		host: text('host').notNull(),
@@ -91,7 +91,7 @@ export const blacklist = pgTable(
 
 export const metrics = pgTable('metric', {
 	id: text('id')
-		.default(sql`gen_random_uuid()`)
+		.$defaultFn(() => crypto.randomUUID())
 		.primaryKey()
 		.notNull(),
 	createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
@@ -114,7 +114,7 @@ export const rooms = pgTable(
 	'room',
 	{
 		id: text('id')
-			.default(sql`gen_random_uuid()`)
+			.$defaultFn(() => crypto.randomUUID())
 			.primaryKey()
 			.notNull(),
 		name: text('name').notNull(),
@@ -157,7 +157,7 @@ export const rooms = pgTable(
 
 export const secretkeys = pgTable('secretkeys', {
 	id: text('id')
-		.default(sql`gen_random_uuid()`)
+		.$defaultFn(() => crypto.randomUUID())
 		.primaryKey()
 		.notNull(),
 	value: text('value').notNull(),
