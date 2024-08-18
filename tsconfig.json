@@ -20,7 +20,6 @@
 		"baseUrl": "./",
 		"paths": {
 			"~/*": ["./*"],
-			"~prisma": ["./lib/prisma.ts"],
 			"~auth": ["./auth/auth.ts"],
 			"~actions/*": ["./actions/*"],
 			"~components/*": ["./components/*"],
@@ -30,7 +29,9 @@
 			"~icons": ["./components/icons.tsx"],
 			"~layouts/*": ["./components/layouts/*"],
 			"~consts/*": ["./consts/*"],
-			"~stores/*": ["./stores/*"]
+			"~stores/*": ["./stores/*"],
+			"~drizzle/*": ["./drizzle/*"],
+			"~db": ["./lib/drizzle.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
