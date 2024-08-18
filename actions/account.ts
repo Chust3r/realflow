@@ -1,7 +1,9 @@
 'use server'
 
-import { prisma } from '~prisma'
 import { getSession } from '~lib/session'
+import { db } from '~db'
+import { schema } from '~drizzle/schema'
+import { eq } from 'drizzle-orm'
 
 interface Params {
 	username: string
@@ -10,12 +12,10 @@ interface Params {
 export const updateAccount = async ({ username }: Params) => {
 	const session = await getSession()
 
-	await prisma.user.update({
-		where: {
-			id: session.id!,
-		},
-		data: {
+	await db
+		.update(schema.users)
+		.set({
 			name: username,
-		},
-	})
+		})
+		.where(eq(schema.users.email, session.email!))
 }
