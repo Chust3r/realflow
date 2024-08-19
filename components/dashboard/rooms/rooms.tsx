@@ -1,4 +1,3 @@
-import { Room } from '@prisma/client'
 import Link from 'next/link'
 import {
 	ChevronRight,
@@ -7,6 +6,7 @@ import {
 	Workflow,
 	CaseLower,
 } from 'lucide-react'
+import { Room } from '~types'
 
 interface Props {
 	rooms: Room[]
