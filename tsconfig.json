@@ -31,7 +31,8 @@
 			"~consts/*": ["./consts/*"],
 			"~stores/*": ["./stores/*"],
 			"~drizzle/*": ["./drizzle/*"],
-			"~db": ["./lib/drizzle.ts"]
+			"~db": ["./lib/drizzle.ts"],
+			"~types": ["./lib/types.ts"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
