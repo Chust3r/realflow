@@ -5,6 +5,7 @@ import { getSession } from '~lib/session'
 import { generateSlug } from '~lib/slug'
 import { db } from '~/lib/drizzle'
 import { schema } from '~drizzle/schema'
+import { revalidatePath } from 'next/cache'
 
 type TReturn = {
 	status: 'success' | 'error'
@@ -51,6 +52,8 @@ export const createRoom = async (values: IValues): Promise<TReturn> => {
 		})
 
 		if (!room) throw new Error('Something went wrong')
+
+		revalidatePath('/dashboard/rooms')
 
 		return {
 			status: 'success',
