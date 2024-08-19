@@ -243,7 +243,7 @@ export function CreateRoom() {
 				<SheetFooter>
 					<div className='border-t w-full h-14 flex justify-end px-3 items-center gap-3'>
 						<Button
-							variant='outline'
+							variant='ghost'
 							size='xs'
 							onClick={() => handleSheetOpenChange(false)}
 						>
@@ -251,7 +251,6 @@ export function CreateRoom() {
 						</Button>
 						<Button
 							size='xs'
-							variant='secondary'
 							type='submit'
 							onClick={() => form.handleSubmit(handleSubmit)()}
 						>

@@ -17,7 +17,8 @@ export async function Sidebar({ slug, type }: Props) {
 			<div className='h-12 max-h-12 border-b flex items-center px-6 gap-3 '>
 				<RealFlow className='w-7 h-7 stroke-foreground fill-foreground' />
 				<h4 className='text-lg truncate'>RealFlow</h4>
-				<Badge variant='secondary'>beta</Badge>
+				<Badge variant='custom' className='relative'>
+					<span className='absolute inset-0 w-4 h-4 rounded-full bg-primary blur-2xl'></span>beta</Badge>
 			</div>
 			<SidebarItems type={type} slug={slug} />
 			<div className='border-t px-4 py-2 flex items-center w-full'>

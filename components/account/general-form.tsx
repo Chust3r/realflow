@@ -105,7 +105,7 @@ export function GeneralForm({ defaultValues, image }: Props) {
 				</div>
 				<div className='flex h-14 border-t justify-end items-center px-6 gap-2'>
 					<Button
-						variant='outline'
+						variant='ghost'
 						size='xs'
 						disabled={!isDirty || isSubmitting}
 						onClick={() => reset()}
@@ -114,7 +114,6 @@ export function GeneralForm({ defaultValues, image }: Props) {
 					</Button>
 					<Button
 						type='submit'
-						variant='secondary'
 						size='xs'
 						disabled={!isDirty || isSubmitting}
 					>

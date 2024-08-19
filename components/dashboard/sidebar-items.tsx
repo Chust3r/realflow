@@ -23,9 +23,9 @@ export function SidebarItems({ type, slug }: Props) {
 						key={item.title}
 						href={item.path}
 						className={cn(
-							'text-sm truncate text-muted-foreground  flex items-center py-2 px-2 rounded  hover:bg-secondary/30 duration-150',
+							'text-sm truncate text-muted-foreground  flex items-center py-2 px-2 rounded  hover:bg-secondary/30 duration-150 relative',
 							{
-								'bg-secondary/50 text-foreground':
+								'bg-secondary/40 text-foreground hover:bg-secondary/40':
 									pathname === item.path,
 							}
 						)}
@@ -38,7 +38,7 @@ export function SidebarItems({ type, slug }: Props) {
 								}
 							)}
 						/>
-						<span className="truncate">{item.title}</span>
+						<p className='truncate'>{item.title}</p>
 					</Link>
 				))}
 			</ul>

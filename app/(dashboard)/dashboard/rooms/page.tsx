@@ -9,7 +9,7 @@ async function Page() {
 	return (
 		<div className='w-full h-full flex flex-col gap-3'>
 			<div>
-				<ShowForm size='xs' variant='secondary'>
+				<ShowForm size='xs'>
 					New room
 				</ShowForm>
 			</div>
