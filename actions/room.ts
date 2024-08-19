@@ -6,11 +6,7 @@ import { generateSlug } from '~lib/slug'
 import { db } from '~/lib/drizzle'
 import { schema } from '~drizzle/schema'
 import { revalidatePath } from 'next/cache'
-
-type TReturn = {
-	status: 'success' | 'error'
-	message?: string
-}
+import { ServerActionResponse } from '~types'
 
 interface IValues {
 	name: string
@@ -20,7 +16,9 @@ interface IValues {
 	webhook: boolean
 }
 
-export const createRoom = async (values: IValues): Promise<TReturn> => {
+export const createRoom = async (
+	values: IValues
+): Promise<ServerActionResponse> => {
 	const user = await getSession()
 
 	try {
@@ -57,6 +55,7 @@ export const createRoom = async (values: IValues): Promise<TReturn> => {
 
 		return {
 			status: 'success',
+			message: 'Room created successfully',
 		}
 	} catch (e) {
 		console.log(e)
