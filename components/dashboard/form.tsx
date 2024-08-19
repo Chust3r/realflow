@@ -28,6 +28,7 @@ import { ConfirmDialog } from './confirmDialog'
 import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
 import { createRoom } from '~actions/room'
+import { useToast } from '~ui/use-toast'
 
 //→ FORM SCHEMA
 
@@ -65,6 +66,8 @@ export function CreateRoom() {
 
 	const { open } = useRoomStore()
 
+	const { toast } = useToast()
+
 	//→ SHEET HANDLERS
 
 	const handleSheetOpenChange = (value: boolean) => {
@@ -80,10 +83,19 @@ export function CreateRoom() {
 	}
 
 	const handleSubmit = async (values: FormValues) => {
-		const { status } = await createRoom(values)
+		const res = await createRoom(values)
 
-		//→ DO SOMETHING WITH STATUS
-
+		if (res.status === 'success') {
+			toast({
+				title: 'Room created',
+				description: res.message || 'Your room has been created',
+			})
+		} else {
+			toast({
+				title: 'Room creation failed',
+				description: res.message || 'Your room could not be created',
+			})
+		}
 		setRoomStore({ open: false })
 		reset()
 	}
