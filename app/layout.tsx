@@ -2,6 +2,7 @@ import { ThemeProvider } from '~components/theme/provider'
 import type { Metadata } from 'next'
 import './globals.css'
 import { GeistSans } from 'geist/font/sans'
+import { Toaster } from '~ui/toaster'
 
 interface Props {
 	children: React.ReactNode
@@ -13,6 +14,7 @@ const Layout = ({ children }: Props) => {
 			<body className={GeistSans.className}>
 				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
 					{children}
+					<Toaster />
 				</ThemeProvider>
 			</body>
 		</html>
