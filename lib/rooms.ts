@@ -1,7 +1,6 @@
 import { getSession } from '~lib/session'
 import { db } from '~db'
 
-
 export const getRooms = async () => {
 	const user = await getSession()
 
@@ -18,6 +17,17 @@ export const getRoomBySlug = async (slug: string) => {
 	const room = await db.query.rooms.findFirst({
 		where: (room, { eq, and }) =>
 			and(eq(room.slug, slug), eq(room.userId, user.id)),
+	})
+
+	return room
+}
+
+export const getRoomAccess = async (slug: string) => {
+	const room = await db.query.rooms.findFirst({
+		where: (room, { eq }) => eq(room.slug, slug),
+		with: {
+			secretkeys: true,
+		},
 	})
 
 	return room
