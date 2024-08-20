@@ -1,4 +1,4 @@
-import { ShowForm } from '~components/dashboard/showForm'
+import { ShowForm } from '~/components/dashboard/show-form'
 import { Plus, Server } from 'lucide-react'
 import { Ripple } from '~ui/ripple'
 
@@ -21,7 +21,7 @@ export function NoRooms() {
 					New room
 				</ShowForm>
 			</div>
-			<Ripple/>
+			<Ripple />
 		</section>
 	)
 }

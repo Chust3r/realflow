@@ -24,7 +24,7 @@ import {
 	pipe,
 } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { ConfirmDialog } from './confirmDialog'
+import { ConfirmDialog } from './confirm-dialog'
 import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
 import { createRoom } from '~actions/room'
