@@ -1,4 +1,4 @@
-import { SocketProvider } from '~dashboard/room/socketProvider'
+import { SocketProvider } from '~/components/dashboard/room/socket-provider'
 import { RoomLayout } from '~layouts/room'
 import { getRoomAccess } from '~lib/rooms'
 
