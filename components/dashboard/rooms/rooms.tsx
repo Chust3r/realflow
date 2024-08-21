@@ -6,6 +6,7 @@ import {
 	LetterText,
 } from 'lucide-react'
 import { Room } from '~types'
+import { Brightness } from '~/components/ui/brightness'
 
 interface Props {
 	rooms: Room[]
@@ -22,8 +23,7 @@ export function Rooms({ rooms }: Props) {
 				>
 					<div className='flex justify-between items-center'>
 						<div className='flex items-center gap-2 relative'>
-							<span className='w-2 h-2 rounded-full bg-green-500 absolute blur'></span>
-							<span className='w-2 h-2 rounded-full bg-green-500'></span>
+							<Brightness className='w-2 h-2 rounded-full bg-green-500 p-0' classNameBrightness='bg-green-500 blur'/>
 							<span className='text-sm text-muted-foreground font-medium tracking-wide block'>
 								{room.name}
 							</span>
