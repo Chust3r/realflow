@@ -1,14 +1,25 @@
 import { getSession } from '~lib/session'
 import { db } from '~db'
+import { sql } from 'drizzle-orm'
+import { RoomWithMessages } from '~types'
 
 export const getRooms = async () => {
 	const user = await getSession()
 
-	const rooms = await db.query.rooms.findMany({
-		where: (room, { eq }) => eq(room.userId, user.id),
-	})
+	const query = sql`
+	SELECT 
+		"r".*,
+		COUNT(*) messages
+  	FROM
+	room r
+		INNER JOIN metric m ON "m"."roomId" = "r"."id"
+  	WHERE
+		"r"."userId" = ${user?.id!}
+  	GROUP BY "r"."id"`
 
-	return rooms
+	const rooms = await db.execute(query)
+
+	return rooms.rows as RoomWithMessages[]
 }
 
 export const getRoomBySlug = async (slug: string) => {

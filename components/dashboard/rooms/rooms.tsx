@@ -1,15 +1,10 @@
 import Link from 'next/link'
-import {
-	ChevronRight,
-	Mail,
-	EthernetPort,
-	LetterText,
-} from 'lucide-react'
-import { Room } from '~types'
+import { ChevronRight, Mail, EthernetPort, LetterText } from 'lucide-react'
+import { RoomWithMessages } from '~types'
 import { Brightness } from '~/components/ui/brightness'
 
 interface Props {
-	rooms: Room[]
+	rooms: RoomWithMessages[]
 }
 
 export function Rooms({ rooms }: Props) {
@@ -23,7 +18,10 @@ export function Rooms({ rooms }: Props) {
 				>
 					<div className='flex justify-between items-center'>
 						<div className='flex items-center gap-2 relative'>
-							<Brightness className='w-2 h-2 rounded-full bg-green-500 p-0' classNameBrightness='bg-green-500 blur'/>
+							<Brightness
+								className='w-2 h-2 rounded-full bg-green-500 p-0'
+								classNameBrightness='bg-green-500 blur'
+							/>
 							<span className='text-sm text-muted-foreground font-medium tracking-wide block'>
 								{room.name}
 							</span>
@@ -42,13 +40,14 @@ export function Rooms({ rooms }: Props) {
 						<div className='flex gap-2'>
 							<EthernetPort className='w-4 h-4 stroke-muted-foreground' />
 							<span className='text-xs text-muted-foreground'>
-								0 connections active
+								{room.connections}/{room.maxSimultaneousConnections}{' '}
+								connections active
 							</span>
 						</div>
 						<div className='flex gap-2'>
 							<Mail className='w-4 h-4 stroke-muted-foreground' />
 							<span className='text-xs text-muted-foreground'>
-								0 messages transferred
+								{room.messages} messages transferred
 							</span>
 						</div>
 					</div>
