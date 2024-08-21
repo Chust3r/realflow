@@ -17,14 +17,7 @@ export const messages = pgTable('message', {
 	createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
 		.defaultNow()
 		.notNull(),
-	updatedAt: timestamp('updatedAt', {
-		precision: 3,
-		mode: 'string',
-	})
-		.$onUpdate(() => sql`now()`)
-		.notNull(),
 	content: text('content').notNull(),
-	size: integer('size').default(0).notNull(),
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
@@ -97,17 +90,12 @@ export const metrics = pgTable('metric', {
 	createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
 		.defaultNow()
 		.notNull(),
-	updatedAt: timestamp('updatedAt', {
-		precision: 3,
-		mode: 'string',
-	})
-		.$onUpdate(() => sql`now()`)
-		.notNull(),
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
 	event: text('event').notNull(),
 	connections: integer('connections').default(0).notNull(),
+	size: integer('size').default(0).notNull(),
 })
 
 export const rooms = pgTable(
