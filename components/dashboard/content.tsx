@@ -1,4 +1,5 @@
 import { Indicator } from '~dashboard/indicator'
+import { ScrollArea } from '~ui/scroll-area'
 
 interface Props {
 	children: React.ReactNode
@@ -12,9 +13,7 @@ export function Content({ children }: Props) {
 					<Indicator />
 				</div>
 			</div>
-			<main className='flex-1 flex-grow overflow-y-hidden p-5'>
-				{children}
-			</main>
+			<ScrollArea className='flex-1 flex-grow p-5 h-full'>{children}</ScrollArea>
 		</div>
 	)
 }
