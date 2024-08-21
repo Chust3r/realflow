@@ -143,6 +143,7 @@ export const rooms = pgTable(
 			.notNull(),
 		publicKey: text('publicKey').notNull(),
 		slug: text('slug').notNull(),
+		connections: integer('connections').default(0).notNull(),
 	},
 	(table) => {
 		return {
