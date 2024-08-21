@@ -10,7 +10,7 @@ async function Page() {
 
 	return (
 		<div className='w-full h-full flex flex-col gap-3'>
-			<div>
+			<div className='flex justify-between items-center'>
 				<ShowForm size='xs'>New room</ShowForm>
 			</div>
 			<h4 className='text-lg text-foreground font-medium tracking-tight'>

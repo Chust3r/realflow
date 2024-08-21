@@ -4,7 +4,6 @@ import {
 	Mail,
 	EthernetPort,
 	LetterText,
-	ShieldCheck,
 } from 'lucide-react'
 import { Room } from '~types'
 
