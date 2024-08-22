@@ -64,7 +64,7 @@ const roomItems = [
 	},
 	{
 		title: 'API keys',
-		path: 'apikeys',
+		path: 'keys',
 		icon: KeyRound,
 	},
 	{
