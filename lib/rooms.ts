@@ -17,9 +17,9 @@ export const getRooms = async () => {
 		"r"."userId" = ${user?.id!}
   	GROUP BY "r"."id"`
 
-	const rooms = await db.execute(query)
+	const rooms = await db.execute<RoomWithMessages>(query)
 
-	return rooms.rows as RoomWithMessages[]
+	return rooms.rows
 }
 
 export const getRoomBySlug = async (slug: string) => {
