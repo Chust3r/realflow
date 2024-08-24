@@ -5,7 +5,7 @@ import { RoomRequest, RoomConnection, RoomMessage, RoomOrigin } from '~types'
 export const getRequests = async (roomId: string) => {
 	const query = sql`
     SELECT
-        TO_CHAR("rq"."createdAt", 'YYYY-MM-DD') date,
+        MIN("rq"."createdAt") date,
         CAST(SUM(
             CASE
             WHEN "authorized" = TRUE THEN 1
@@ -25,9 +25,9 @@ export const getRequests = async (roomId: string) => {
         "r"."id" = ${roomId}
     GROUP BY
         TO_CHAR("rq"."createdAt", 'YYYY-MM-DD'),
-        NAME,
         "r"."id"
-    ORDER BY TO_CHAR("rq"."createdAt", 'YYYY-MM-DD')
+    ORDER BY
+        date
     `
 
 	const queryTotal = sql`
@@ -53,7 +53,7 @@ export const getRequests = async (roomId: string) => {
 export const getConnections = async (roomId: string) => {
 	const query = sql`
     SELECT
-        TO_CHAR("m"."createdAt", 'YYYY-MM-DD') date,
+        MIN("m"."createdAt") date,
         MAX("connections") connections
     FROM
         metric m
@@ -61,6 +61,7 @@ export const getConnections = async (roomId: string) => {
         "m"."roomId" = ${roomId}
     GROUP BY
         TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
+    ORDER BY date
     `
 
 	const connections = await db.execute<RoomConnection>(query)
@@ -71,7 +72,7 @@ export const getConnections = async (roomId: string) => {
 export const getMessages = async (roomId: string) => {
 	const query = sql`
     SELECT
-        TO_CHAR("m"."createdAt", 'YYYY-MM-DD') date,
+        MIN("m"."createdAt") date,
         COUNT("m"."id") messages
     FROM
         metric m
@@ -79,7 +80,8 @@ export const getMessages = async (roomId: string) => {
     WHERE
         "r"."id" = ${roomId}
     GROUP BY
-        TO_CHAR("m"."createdAt", 'YYYY-MM-DD');
+        TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
+    ORDER BY date;
     `
 
 	const queryTotal = sql`
