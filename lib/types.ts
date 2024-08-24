@@ -23,7 +23,7 @@ export type RoomMessage = {
 
 export type RoomOrigin = {
 	address: string
-	total:number
+	total: number
 	authorized: number
 	unauthorized: number
 }

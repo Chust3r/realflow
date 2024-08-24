@@ -11,7 +11,7 @@ import {
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { RoomConnection } from '~types'
 import { useSocket } from '../socket-provider'
-import { EthernetPort } from 'lucide-react'
+import { formatDate } from 'date-fns'
 
 const config: ChartConfig = {
 	connections: {
@@ -79,14 +79,9 @@ export function MetricsConnections({ data = [] }: Props) {
 							axisLine={false}
 							tickMargin={8}
 							minTickGap={32}
-							tickFormatter={(value) => {
-								const date = new Date(value)
-
-								return date.toLocaleDateString('en-US', {
-									month: 'short',
-									day: 'numeric',
-								})
-							}}
+							tickFormatter={(value) =>
+								formatDate(new Date(value), 'MMM dd')
+							}
 						/>
 						<YAxis
 							tickLine={false}
@@ -100,15 +95,9 @@ export function MetricsConnections({ data = [] }: Props) {
 							cursor={false}
 							content={
 								<ChartTooltipContent
-									labelFormatter={(value) => {
-										return new Date(value).toLocaleDateString(
-											'en-US',
-											{
-												month: 'short',
-												day: 'numeric',
-											}
-										)
-									}}
+									labelFormatter={(value) =>
+										formatDate(new Date(value), 'MMM dd')
+									}
 									indicator='dot'
 								/>
 							}
