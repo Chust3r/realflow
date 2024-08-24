@@ -22,25 +22,32 @@ import {
 	array,
 	regex,
 	pipe,
+	minLength,
+	maxLength,
 } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { ConfirmDialog } from './confirm-dialog'
 import { useSecretStore, setSecretStore } from '~stores/secret'
 import { Plus, Trash } from 'lucide-react'
-/* import { createRoom } from '~actions/room' */
+import { createSecretKey } from '~actions/api-keys'
 import { useToast } from '~ui/use-toast'
 import { Popover, PopoverContent, PopoverTrigger } from '~ui/popover'
 import { Calendar } from '~ui/calendar'
 import { format } from 'date-fns'
 import { cn } from '~lib/utils'
 import { Calendar as CalendarIcon } from 'lucide-react'
-import { generateKeys, maskKey } from '~lib/keys'
+import { Fragment } from 'react'
+
 
 //→ FORM SCHEMA
 
 const formSchema = object({
 	value: string(),
-	description: optional(string()),
+	description: pipe(
+		string(),
+		minLength(5, 'Description must be at least 5 characters'),
+		maxLength(50)
+	),
 	expires: optional(date()),
 	ipAddresses: array(
 		object({
@@ -54,13 +61,14 @@ const formSchema = object({
 
 type FormValues = InferInput<typeof formSchema>
 
-export function CreateSecretKeys() {
-	const defaultValues: FormValues = {
-		value: generateKeys().secretKey,
-		description: '',
-		ipAddresses: [],
-	}
+const defaultValues: FormValues = {
+	value: 'sk_random_secret_key()',
+	description: '',
+	expires: undefined,
+	ipAddresses: [],
+}
 
+export function CreateSecretKeys() {
 	const form = useForm<FormValues>({
 		resolver: valibotResolver(formSchema),
 		defaultValues,
@@ -79,6 +87,8 @@ export function CreateSecretKeys() {
 	const { open } = useSecretStore()
 
 	const { toast } = useToast()
+
+	const { roomId } = useSecretStore()
 
 	const handleAddIP = () => {
 		append({ ipAddress: '' })
@@ -101,12 +111,28 @@ export function CreateSecretKeys() {
 
 		reset()
 	}
-
 	const handleSubmit = async (values: FormValues) => {
+		const res = await createSecretKey({
+			roomId,
+			adresses: values.ipAddresses.map((ip) => ip.ipAddress),
+			description: values.description,
+			expires: values.expires
+				? format(new Date(values.expires), 'yyyy-MM-dd HH:mm:ss.SSS')
+				: undefined,
+		})
+
+		if (res.status === 'success') {
+			toast({
+				title: 'Room created',
+				description: res.message || 'Your room has been created',
+			})
+		} else {
+			toast({
+				title: 'Room creation failed',
+				description: res.message || 'Your room could not be created',
+			})
+		}
 		setSecretStore({ open: false })
-
-		console.log(values)
-
 		reset()
 	}
 
@@ -139,7 +165,7 @@ export function CreateSecretKeys() {
 												<FormControl className='col-span-8'>
 													<Input
 														{...field}
-														placeholder='Optional'
+														placeholder='Describe your secret key'
 													/>
 												</FormControl>
 
@@ -161,7 +187,6 @@ export function CreateSecretKeys() {
 													<Input
 														{...field}
 														disabled
-														value={maskKey(field.value, 15)}
 														className='bg-accent/10'
 													/>
 												</FormControl>
@@ -212,8 +237,7 @@ export function CreateSecretKeys() {
 															selected={field.value}
 															onSelect={field.onChange}
 															disabled={(date) =>
-																date > new Date() ||
-																date < new Date('1900-01-01')
+																date < new Date()
 															}
 															initialFocus
 														/>
@@ -257,7 +281,7 @@ export function CreateSecretKeys() {
 								</div>
 								<div className='flex flex-col gap-3'>
 									{fields.map((field, i) => (
-										<>
+										<Fragment key={field.id}>
 											<FormField
 												{...form.register(
 													`ipAddresses.${i}.ipAddress`
@@ -287,7 +311,7 @@ export function CreateSecretKeys() {
 													</FormItem>
 												)}
 											/>
-										</>
+										</Fragment>
 									))}
 								</div>
 							</div>

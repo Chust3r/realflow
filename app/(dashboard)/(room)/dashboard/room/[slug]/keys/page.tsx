@@ -25,6 +25,7 @@ async function Page({ params }: Props) {
 				</AlertDescription>
 			</Alert>
 			<APIKeys
+				roomId={room?.id!}
 				enableAuth={room?.enableAuth!}
 				pk={room?.publicKey!}
 				sk={sk}

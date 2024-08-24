@@ -1,10 +1,8 @@
 'use client'
-import { SecretKey } from '~lib/types'
 import { Switch } from '~ui/switch'
 import { Button } from '~ui/button'
-import { maskKey } from '~lib/keys'
-import { Copy } from 'lucide-react'
-import { ShowForm } from './show-form'
+import { useState } from 'react'
+import { useToast } from '~ui/use-toast'
 import {
 	Table,
 	TableBody,
@@ -13,15 +11,47 @@ import {
 	TableHeader,
 	TableRow,
 } from '~ui/table'
+import { SecretKey } from '~lib/types'
+import { maskKey } from '~lib/keys'
+import { ShowForm } from './show-form'
 import { formatDate } from 'date-fns'
+import { switchEnableAuth, removeSecretKey } from '~actions/api-keys'
+import { Copy, Trash } from 'lucide-react'
 
 interface Props {
+	roomId: string
 	enableAuth: boolean
 	pk: string
 	sk: SecretKey[]
 }
 
-export function APIKeys({ enableAuth = false, pk, sk }: Props) {
+export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
+	const [disabled, setDisabled] = useState(false)
+
+	const { toast } = useToast()
+
+	const handleSwitch = async (value: boolean) => {
+		setDisabled(true)
+		await switchEnableAuth(roomId, value)
+		setDisabled(false)
+	}
+
+	const handleRemove = async (id: string) => {
+		const res = await removeSecretKey(roomId, id)
+
+		if (res.status === 'success') {
+			toast({
+				title: 'Secret Key removed',
+				description: res.message || 'Your Secret Key has been removed',
+			})
+		} else {
+			toast({
+				title: 'Secret Key failed',
+				description: res.message || 'Your room could not be removed',
+			})
+		}
+	}
+
 	return (
 		<section className='w-full rounded-lg border bg-accent/10'>
 			<div className='px-6 py-4 border-b flex items-center'>
@@ -36,7 +66,12 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 						>
 							{enableAuth ? 'Auth Enabled' : 'Auth Disabled'}
 						</label>
-						<Switch id='enableAuth' checked={enableAuth} />
+						<Switch
+							id='enableAuth'
+							disabled={disabled}
+							checked={enableAuth}
+							onCheckedChange={handleSwitch}
+						/>
 					</div>
 				</div>
 			</div>
@@ -46,7 +81,9 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 				</span>
 				<div className='col-span-8 flex justify-end items-center gap-2'>
 					<div className='text-sm text-muted-foreground'>
-						<span>{maskKey(pk, 20)}</span>
+						<span className='min-w-[100px] line-clamp-1'>
+							{maskKey(pk, 20)}
+						</span>
 					</div>
 					<Button variant='ghost' size='xs' className='p-1.5'>
 						<Copy className='h-4 w-4 stroke-muted-foreground' />
@@ -54,11 +91,13 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 				</div>
 			</div>
 			<div className='px-6 py-4 grid grid-cols-12 items-center gap-2'>
-				<span className='text-sm font-medium text-muted-foreground col-span-4'>
+				<p className='text-sm font-medium text-muted-foreground col-span-4'>
 					Secret Keys
-				</span>
+				</p>
 				<div className='col-span-8 flex justify-end items-center gap-2'>
-					<ShowForm size='xs'>New Secret Key</ShowForm>
+					<ShowForm size='xs' roomId={roomId} disabled={sk.length >= 3}>
+						New Secret Key
+					</ShowForm>
 				</div>
 				<div className='col-span-12'>
 					<Table aria-label='Secret Keys'>
@@ -73,11 +112,11 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{sk.map(({ expires, id, description, value }) => (
+							{sk.map(({ expires, id, description, value }, i) => (
 								<TableRow key={id}>
-									<TableCell>
+									<TableCell className='text-sm'>
 										{expires
-											? formatDate(new Date(expires), 'yyyy-MM-dd')
+											? formatDate(new Date(expires), 'MMM dd yyyy')
 											: 'Never'}
 									</TableCell>
 									<TableCell>
@@ -97,7 +136,19 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 											</Button>
 										</div>
 									</TableCell>
-									<TableCell className='text-right'>$250.00</TableCell>
+									<TableCell className='text-right'>
+										{i !== 0 && (
+											<div>
+												<Button
+													variant='ghost'
+													size='xs'
+													onClick={() => handleRemove(id)}
+												>
+													<Trash className='h-4 w-4 stroke-muted-foreground' />
+												</Button>
+											</div>
+										)}
+									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>
