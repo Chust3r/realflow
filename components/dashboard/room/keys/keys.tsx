@@ -90,71 +90,76 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 					</Button>
 				</div>
 			</div>
-			<div className='px-6 py-4 grid grid-cols-12 items-center gap-2'>
-				<p className='text-sm font-medium text-muted-foreground col-span-4'>
-					Secret Keys
-				</p>
-				<div className='col-span-8 flex justify-end items-center gap-2'>
-					<ShowForm size='xs' roomId={roomId} disabled={sk.length >= 3}>
-						New Secret Key
-					</ShowForm>
-				</div>
-				<div className='col-span-12'>
-					<Table aria-label='Secret Keys'>
-						<TableHeader>
-							<TableRow>
-								<TableHead className='w-[150px]'>
-									Expiration date
-								</TableHead>
-								<TableHead>Description</TableHead>
-								<TableHead>Value</TableHead>
-								<TableHead className='text-right'>Actions</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{sk.map(({ expires, id, description, value }, i) => (
-								<TableRow key={id}>
-									<TableCell className='text-sm'>
-										{expires
-											? formatDate(new Date(expires), 'MMM dd yyyy')
-											: 'Never'}
-									</TableCell>
-									<TableCell>
-										{description ? description : 'No description'}
-									</TableCell>
-									<TableCell>
-										<div className='col-span-8 flex  items-center gap-2'>
-											<div className='text-sm text-muted-foreground'>
-												<span>{maskKey(value, 15)}</span>
-											</div>
-											<Button
-												variant='ghost'
-												size='xs'
-												className='p-1.5'
-											>
-												<Copy className='h-4 w-4 stroke-muted-foreground' />
-											</Button>
-										</div>
-									</TableCell>
-									<TableCell className='text-right'>
-										{i !== 0 && (
-											<div>
+			{enableAuth && (
+				<div className='px-6 py-4 grid grid-cols-12 items-center gap-2'>
+					<p className='text-sm font-medium text-muted-foreground col-span-4'>
+						Secret Keys
+					</p>
+					<div className='col-span-8 flex justify-end items-center gap-2'>
+						<ShowForm size='xs' roomId={roomId} disabled={sk.length >= 3}>
+							New Secret Key
+						</ShowForm>
+					</div>
+					<div className='col-span-12'>
+						<Table aria-label='Secret Keys'>
+							<TableHeader>
+								<TableRow>
+									<TableHead className='w-[150px]'>
+										Expiration date
+									</TableHead>
+									<TableHead>Description</TableHead>
+									<TableHead>Value</TableHead>
+									<TableHead className='text-right'>Actions</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{sk.map(({ expires, id, description, value }, i) => (
+									<TableRow key={id}>
+										<TableCell className='text-sm'>
+											{expires
+												? formatDate(
+														new Date(expires),
+														'MMM dd yyyy'
+													)
+												: 'Never'}
+										</TableCell>
+										<TableCell>
+											{description ? description : 'No description'}
+										</TableCell>
+										<TableCell>
+											<div className='col-span-8 flex  items-center gap-2'>
+												<div className='text-sm text-muted-foreground'>
+													<span>{maskKey(value, 15)}</span>
+												</div>
 												<Button
 													variant='ghost'
 													size='xs'
-													onClick={() => handleRemove(id)}
+													className='p-1.5'
 												>
-													<Trash className='h-4 w-4 stroke-muted-foreground' />
+													<Copy className='h-4 w-4 stroke-muted-foreground' />
 												</Button>
 											</div>
-										)}
-									</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
+										</TableCell>
+										<TableCell className='text-right'>
+											{i !== 0 && (
+												<div>
+													<Button
+														variant='ghost'
+														size='xs'
+														onClick={() => handleRemove(id)}
+													>
+														<Trash className='h-4 w-4 stroke-muted-foreground' />
+													</Button>
+												</div>
+											)}
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</div>
 				</div>
-			</div>
+			)}
 		</section>
 	)
 }
