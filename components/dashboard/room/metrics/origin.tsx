@@ -85,15 +85,7 @@ export function MetricsOrigin({ data = [], total = 0 }: Props) {
 							stackId='a'
 							radius={[0, 4, 4, 0]}
 							opacity={0.5}
-						>
-							<LabelList
-								dataKey='total'
-								position='right'
-								offset={8}
-								className='fill-[--color-label]'
-								fontSize={12}
-							/>
-						</Bar>
+						></Bar>
 						<ChartTooltip
 							cursor={false}
 							content={
