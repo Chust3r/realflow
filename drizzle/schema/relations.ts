@@ -6,14 +6,7 @@ import {
 	users,
 	verificationTokens,
 } from './auth'
-import {
-	blacklist,
-	metrics,
-	messages,
-	requests,
-	rooms,
-	secretkeys,
-} from './tables'
+import { metrics, messages, requests, rooms, secretkeys } from './tables'
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
 	user: one(users, {
@@ -45,7 +38,6 @@ export const messagesRelations = relations(messages, ({ one }) => ({
 export const roomsRelations = relations(rooms, ({ one, many }) => ({
 	messages: many(messages),
 	requests: many(requests),
-	blacklists: many(blacklist),
 	metrics: many(metrics),
 	user: one(users, {
 		fields: [rooms.userId],
@@ -57,13 +49,6 @@ export const roomsRelations = relations(rooms, ({ one, many }) => ({
 export const requestsRelations = relations(requests, ({ one }) => ({
 	room: one(rooms, {
 		fields: [requests.roomId],
-		references: [rooms.id],
-	}),
-}))
-
-export const blacklistRelations = relations(blacklist, ({ one }) => ({
-	room: one(rooms, {
-		fields: [blacklist.roomId],
 		references: [rooms.id],
 	}),
 }))

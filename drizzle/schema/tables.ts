@@ -21,6 +21,7 @@ export const messages = pgTable('message', {
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
+	size: integer('size').default(0).notNull(),
 })
 
 export const requests = pgTable('request', {
@@ -32,55 +33,13 @@ export const requests = pgTable('request', {
 	createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
 		.defaultNow()
 		.notNull(),
-	updatedAt: timestamp('updatedAt', {
-		precision: 3,
-		mode: 'string',
-	})
-		.$onUpdate(() => sql`now()`)
-		.notNull(),
 	address: text('address').notNull(),
 	authorized: boolean('authorized').notNull(),
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
 	userAgent: text('userAgent').notNull(),
-	metadata: text('metadata').notNull(),
 })
-
-export const blacklist = pgTable(
-	'blacklist',
-	{
-		id: text('id')
-			.$defaultFn(() => crypto.randomUUID())
-			.primaryKey()
-			.notNull(),
-		host: text('host').notNull(),
-		createdAt: timestamp('createdAt', { precision: 3, mode: 'string' })
-			.defaultNow()
-			.notNull(),
-		updatedAt: timestamp('updatedAt', {
-			precision: 3,
-			mode: 'string',
-		})
-			.$onUpdate(() => sql`now()`)
-			.notNull(),
-		roomId: text('roomId')
-			.notNull()
-			.references(() => rooms.id, {
-				onDelete: 'cascade',
-				onUpdate: 'cascade',
-			}),
-	},
-	(table) => {
-		return {
-			hostRoomIdKey: uniqueIndex('blacklist_host_roomId_key').using(
-				'btree',
-				table.host,
-				table.roomId
-			),
-		}
-	}
-)
 
 export const metrics = pgTable('metric', {
 	id: text('id')
@@ -151,6 +110,7 @@ export const secretkeys = pgTable('secretkeys', {
 		.notNull(),
 	value: text('value').notNull(),
 	expires: timestamp('expires', { precision: 3, mode: 'string' }),
+	ipAddress: text('ipAddress').default('').notNull(),
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
