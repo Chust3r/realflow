@@ -61,7 +61,7 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 					<ShowForm size='xs'>New Secret Key</ShowForm>
 				</div>
 				<div className='col-span-12'>
-					<Table className='w-full'>
+					<Table aria-label='Secret Keys'>
 						<TableHeader>
 							<TableRow>
 								<TableHead className='w-[150px]'>
@@ -73,11 +73,30 @@ export function APIKeys({ enableAuth = false, pk, sk }: Props) {
 							</TableRow>
 						</TableHeader>
 						<TableBody>
-							{sk.map(({ expires, id }) => (
+							{sk.map(({ expires, id, description, value }) => (
 								<TableRow key={id}>
-									<TableCell className='font-medium'>INV001</TableCell>
-									<TableCell>Paid</TableCell>
-									<TableCell>Credit Card</TableCell>
+									<TableCell>
+										{expires
+											? formatDate(new Date(expires), 'yyyy-MM-dd')
+											: 'Never'}
+									</TableCell>
+									<TableCell>
+										{description ? description : 'No description'}
+									</TableCell>
+									<TableCell>
+										<div className='col-span-8 flex  items-center gap-2'>
+											<div className='text-sm text-muted-foreground'>
+												<span>{maskKey(value, 15)}</span>
+											</div>
+											<Button
+												variant='ghost'
+												size='xs'
+												className='p-1.5'
+											>
+												<Copy className='h-4 w-4 stroke-muted-foreground' />
+											</Button>
+										</div>
+									</TableCell>
 									<TableCell className='text-right'>$250.00</TableCell>
 								</TableRow>
 							))}
