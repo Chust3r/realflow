@@ -5,6 +5,7 @@ import {
 	getConnections,
 	getOrigins,
 } from '~lib/metrics'
+import { Alert, AlertDescription, AlertTitle } from '~ui/alert'
 import { MetricsRequests } from '~dashboard/room/metrics/requests'
 import { MetricsConnections } from '~dashboard/room/metrics/connections'
 import { MetricsOrigin } from '~dashboard/room/metrics/origin'
@@ -26,6 +27,13 @@ async function Page({ params }: Props) {
 
 	return (
 		<div className='overflow-x-hidden grid grid-cols-12 gap-4'>
+			<Alert className='col-span-12 bg-accent/5'>
+				<AlertTitle>Metrics Overview</AlertTitle>
+				<AlertDescription className='text-muted-foreground'>
+					Monitor your channel's performance with real-time metrics and
+					analytics to optimize engagement and make informed decisions
+				</AlertDescription>
+			</Alert>
 			<section className='col-span-12 lg:col-span-6'>
 				<MetricsRequests data={requests.requests} total={requests.total} />
 			</section>
