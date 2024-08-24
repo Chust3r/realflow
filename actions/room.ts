@@ -44,6 +44,7 @@ export const createRoom = async (
 			await tx.insert(schema.secretkeys).values({
 				roomId: newRoom[0].id,
 				value: secretKey,
+				description: 'DEFAULT',
 			})
 
 			return newRoom
