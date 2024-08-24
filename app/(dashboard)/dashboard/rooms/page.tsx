@@ -9,7 +9,7 @@ async function Page() {
 	const user = await getSession()
 
 	return (
-		<div className='w-full h-full flex flex-col gap-3'>
+		<div className='w-full flex flex-col gap-3'>
 			<div className='flex justify-between items-center'>
 				<ShowForm size='xs'>New room</ShowForm>
 			</div>
