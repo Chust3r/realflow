@@ -110,6 +110,7 @@ export const secretkeys = pgTable('secretkeys', {
 		.notNull(),
 	value: text('value').notNull(),
 	expires: timestamp('expires', { precision: 3, mode: 'string' }),
+	description: text('description').notNull(),
 	ipAddress: text('ipAddress').default('').notNull(),
 	roomId: text('roomId')
 		.notNull()

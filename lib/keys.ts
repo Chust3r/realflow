@@ -21,3 +21,10 @@ export const generateKeys = () => {
 		secretKey,
 	}
 }
+
+export const maskKey = (key: string, chars: number) => {
+	const start = key.slice(0, chars)
+	const end = key.slice(-chars)
+
+	return `${start}...${end}`
+}

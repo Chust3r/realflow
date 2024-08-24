@@ -3,6 +3,8 @@ import { schema } from '~drizzle/schema'
 
 export type Room = InferSelectModel<typeof schema.rooms>
 
+export type SecretKey = InferSelectModel<typeof schema.secretkeys>
+
 export type RoomWithMessages = Room & { messages: number }
 
 export type RoomRequest = {

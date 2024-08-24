@@ -4,7 +4,7 @@ import { Ripple } from '~ui/ripple'
 
 export function NoRooms() {
 	return (
-		<section className='w-full h-full grid place-content-center p-5 relative min-h-[300px]'>
+		<section className='w-full h-full grid place-content-center p-5 relative min-h-[350px]'>
 			<div className='flex flex-col items-center gap-2'>
 				<Server className='w-16 h-16 stroke-muted-foreground' />
 				<div className='flex flex-col items-center gap-1 relative'>

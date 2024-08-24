@@ -16,7 +16,7 @@ async function Page() {
 			<h4 className='text-lg text-foreground font-medium tracking-tight'>
 				{user?.name}'s Rooms
 			</h4>
-			<section className='flex-1 flex-grow'>
+			<section className='flex-1 flex-grow '>
 				{rooms.length === 0 ? <NoRooms /> : <Rooms rooms={rooms} />}
 			</section>
 		</div>
