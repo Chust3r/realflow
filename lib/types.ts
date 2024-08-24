@@ -21,6 +21,13 @@ export type RoomMessage = {
 	messages: number
 }
 
+export type RoomOrigin = {
+	address: string
+	total:number
+	authorized: number
+	unauthorized: number
+}
+
 export type ServerActionResponse = {
 	status: 'success' | 'error'
 	message?: string
