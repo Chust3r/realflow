@@ -59,6 +59,7 @@ export const getConnections = async (roomId: string) => {
         metric m
     WHERE
         "m"."roomId" = ${roomId}
+        AND "m"."event" = 'connection'
     GROUP BY
         TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
     ORDER BY date
@@ -79,6 +80,7 @@ export const getMessages = async (roomId: string) => {
     INNER JOIN room r ON "m"."roomId" = "r"."id"
     WHERE
         "r"."id" = ${roomId}
+        AND "m"."event" != 'connection'
     GROUP BY
         TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
     ORDER BY date;
@@ -91,7 +93,9 @@ export const getMessages = async (roomId: string) => {
         metric m
     INNER JOIN room r ON "m"."roomId" = "r"."id"
     WHERE
-        "r"."id" = ${roomId}`
+        "r"."id" = ${roomId}
+        AND "m"."event" != 'connection'
+    `
 
 	const messages = await db.execute<RoomMessage>(query)
 
