@@ -6,9 +6,14 @@ import { copyToClipboard } from '~lib/copy-to-clipboard'
 interface Props {
 	data: string
 	onCopy?: () => void
+	delay?: number
 }
 
-export function CopyToClipboard({ data, onCopy = () => {} }: Props) {
+export function CopyToClipboard({
+	data,
+	onCopy = () => {},
+	delay = 1000,
+}: Props) {
 	const [isCopied, setIsCopied] = useState(false)
 
 	const handleCopy = async () => {
@@ -16,9 +21,11 @@ export function CopyToClipboard({ data, onCopy = () => {} }: Props) {
 
 		setIsCopied(true)
 
+        onCopy()
+
 		setTimeout(() => {
 			setIsCopied(false)
-		}, 1000)
+		}, delay)
 	}
 
 	return (
