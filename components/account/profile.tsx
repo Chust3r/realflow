@@ -11,6 +11,8 @@ import {
 } from '~ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '~ui/avatar'
 import { useTheme } from 'next-themes'
+import { logOut } from '~actions/auth'
+import Link from 'next/link'
 
 interface Props {
 	user: {
@@ -22,6 +24,11 @@ interface Props {
 
 export function Profile({ user }: Props) {
 	const { setTheme, theme } = useTheme()
+
+	const handleLogOut = async () => {
+		await logOut()
+	}
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className='w-full'>
@@ -51,9 +58,11 @@ export function Profile({ user }: Props) {
 					</div>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
-					<span className='text-xs text-muted-foreground'>Account</span>
-				</DropdownMenuItem>
+				<Link href='/dashboard/account/me'>
+					<DropdownMenuItem>
+						<span className='text-xs text-muted-foreground'>Account</span>
+					</DropdownMenuItem>
+				</Link>
 				<DropdownMenuSeparator />
 				<DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
 					<span className='text-xs text-muted-foreground p-2'>Theme</span>
@@ -78,8 +87,10 @@ export function Profile({ user }: Props) {
 					</DropdownMenuRadioItem>
 				</DropdownMenuRadioGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
-					<span className='text-xs text-muted-foreground'>Log out</span>
+				<DropdownMenuItem onClick={handleLogOut}>
+					<span className='text-xs text-muted-foreground' role='button'>
+						Log out
+					</span>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
