@@ -17,6 +17,7 @@ import { ShowForm } from './show-form'
 import { formatDate } from 'date-fns'
 import { switchEnableAuth, removeSecretKey } from '~actions/api-keys'
 import { Copy, Trash } from 'lucide-react'
+import { CopyToClipboard } from '~ui/copy-to-clipboard'
 
 interface Props {
 	roomId: string
@@ -85,9 +86,7 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 							{maskKey(pk, 20)}
 						</span>
 					</div>
-					<Button variant='ghost' size='xs' className='p-1.5'>
-						<Copy className='h-4 w-4 stroke-muted-foreground' />
-					</Button>
+					<CopyToClipboard data={pk} />
 				</div>
 			</div>
 			{enableAuth && (
@@ -131,13 +130,7 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 												<div className='text-sm text-muted-foreground'>
 													<span>{maskKey(value, 15)}</span>
 												</div>
-												<Button
-													variant='ghost'
-													size='xs'
-													className='p-1.5'
-												>
-													<Copy className='h-4 w-4 stroke-muted-foreground' />
-												</Button>
+												<CopyToClipboard data={value} />
 											</div>
 										</TableCell>
 										<TableCell className='text-right'>
