@@ -54,7 +54,8 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 	}
 
 	return (
-		<section className='w-full rounded-lg border bg-accent/10'>
+		<section className='w-full rounded-lg border bg-accent/10 relative overflow-hidden'>
+			<span className='absolute  w-10 h-10 bg-accent rounded-full blur-2xl right-0'></span>
 			<div className='px-6 py-4 border-b flex items-center'>
 				<div className='w-full flex justify-between items-center'>
 					<h3 className='text-base font-medium tracking-wide text-foreground'>
@@ -81,10 +82,8 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 					Public Key
 				</span>
 				<div className='col-span-8 flex justify-end items-center gap-2'>
-					<div className='text-sm text-muted-foreground'>
-						<span className='min-w-[100px] line-clamp-1'>
-							{maskKey(pk, 20)}
-						</span>
+					<div className='text-sm text-muted-foreground min-w-[100px] truncate'>
+						<span>{maskKey(pk, 15)}</span>
 					</div>
 					<CopyToClipboard data={pk} />
 				</div>
@@ -126,7 +125,7 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 											{description ? description : 'No description'}
 										</TableCell>
 										<TableCell>
-											<div className='col-span-8 flex  items-center gap-2'>
+											<div className='col-span-8 flex items-center gap-2'>
 												<div className='text-sm text-muted-foreground'>
 													<span>{maskKey(value, 15)}</span>
 												</div>
