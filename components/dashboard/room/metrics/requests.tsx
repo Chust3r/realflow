@@ -8,18 +8,18 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from '~ui/chart'
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { RoomRequest } from '~types'
 import { formatDate } from 'date-fns'
 
 const config: ChartConfig = {
 	authorized: {
 		label: 'Authorized',
-		color: '#262626',
+		color: '#171717',
 	},
 	unauthorized: {
 		label: 'Unauthorized',
-		color: '#404040',
+		color: '#262626',
 	},
 }
 
@@ -44,58 +44,20 @@ export function MetricsRequests({ data = [], total = 0 }: Props) {
 					className='aspect-auto h-[250px] w-full'
 					config={config}
 				>
-					<AreaChart accessibilityLayer data={data}>
-						<defs>
-							<linearGradient
-								id='fillAuthorized'
-								x1='0'
-								y1='0'
-								x2='0'
-								y2='1'
-							>
-								<stop
-									offset='5%'
-									stopColor='var(--color-authorized)'
-									stopOpacity={0.8}
-								/>
-								<stop
-									offset='95%'
-									stopColor='var(--color-authorized)'
-									stopOpacity={0.1}
-								/>
-							</linearGradient>
-							<linearGradient
-								id='fillUnauthorized'
-								x1='0'
-								y1='0'
-								x2='0'
-								y2='1'
-							>
-								<stop
-									offset='5%'
-									stopColor='var(--color-unauthorized)'
-									stopOpacity={0.8}
-								/>
-								<stop
-									offset='95%'
-									stopColor='var(--color-unauthorized)'
-									stopOpacity={0.1}
-								/>
-							</linearGradient>
-						</defs>
-						<Area
+					<BarChart accessibilityLayer data={data}>
+						<Bar
 							dataKey='authorized'
-							type='natural'
-							fill='url(#fillAuthorized)'
+							fill='var(--color-authorized)'
 							stroke='var(--color-authorized)'
 							radius={5}
+							opacity={0.8}
 						/>
-						<Area
+						<Bar
 							dataKey='unauthorized'
-							type='natural'
-							fill='url(#fillUnauthorized)'
+							fill='var(--color-unauthorized)'
 							stroke='var(--color-unauthorized)'
 							radius={5}
+							opacity={0.8}
 						/>
 						<CartesianGrid vertical={false} />
 						<XAxis
@@ -127,7 +89,7 @@ export function MetricsRequests({ data = [], total = 0 }: Props) {
 							}
 						/>
 						<ChartLegend content={<ChartLegendContent />} />
-					</AreaChart>
+					</BarChart>
 				</ChartContainer>
 			</CardContent>
 		</Card>

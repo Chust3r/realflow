@@ -8,7 +8,7 @@ import {
 	ChartLegend,
 	ChartLegendContent,
 } from '~ui/chart'
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { RoomConnection } from '~types'
 import { useSocket } from '../socket-provider'
 import { formatDate } from 'date-fns'
@@ -16,7 +16,7 @@ import { formatDate } from 'date-fns'
 const config: ChartConfig = {
 	connections: {
 		label: 'Connections',
-		color: '#262626',
+		color: '#171717',
 	},
 }
 
@@ -44,33 +44,14 @@ export function MetricsConnections({ data = [] }: Props) {
 					className='aspect-auto h-[250px] w-full'
 					config={config}
 				>
-					<AreaChart accessibilityLayer data={data}>
-						<defs>
-							<linearGradient
-								id='fillConnections'
-								x1='0'
-								y1='0'
-								x2='0'
-								y2='1'
-							>
-								<stop
-									offset='5%'
-									stopColor='var(--color-connections)'
-									stopOpacity={0.8}
-								/>
-								<stop
-									offset='95%'
-									stopColor='var(--color-connections)'
-									stopOpacity={0.1}
-								/>
-							</linearGradient>
-						</defs>
-						<Area
+					<BarChart accessibilityLayer data={data}>
+						<Bar
 							dataKey='connections'
 							type='natural'
-							fill='url(#fillConnections)'
+							fill='var(--color-connections)'
 							stroke='var(--color-connections)'
 							radius={5}
+							opacity={0.8}
 						/>
 						<CartesianGrid vertical={false} />
 						<XAxis
@@ -103,7 +84,7 @@ export function MetricsConnections({ data = [] }: Props) {
 							}
 						/>
 						<ChartLegend content={<ChartLegendContent />} />
-					</AreaChart>
+					</BarChart>
 				</ChartContainer>
 			</CardContent>
 		</Card>
