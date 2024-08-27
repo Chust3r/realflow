@@ -33,7 +33,7 @@ export const switchEnableAuth = async (
 					eq(schema.rooms.userId, session.id)
 				)
 			)
-		revalidatePath('/dashboard/room/[slug]/keys')
+		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
 			status: 'success',
@@ -63,7 +63,7 @@ export const createSecretKey = async (
 			ipAddress: values.adresses.join('|'),
 		})
 
-		revalidatePath('/dashboard/room/[slug]/keys')
+		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
 			status: 'success',
@@ -91,7 +91,7 @@ export const removeSecretKey = async (
 					eq(schema.secretkeys.id, id)
 				)
 			)
-		revalidatePath('/dashboard/room/[slug]/keys')
+		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
 			status: 'success',
