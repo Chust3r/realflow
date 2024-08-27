@@ -54,15 +54,14 @@ export const getConnections = async (roomId: string) => {
 	const query = sql`
     SELECT
         MIN("m"."createdAt") date,
-        MAX("connections") connections
+        MAX(CAST(payload AS INTEGER)) connections
     FROM
         metric m
     WHERE
         "m"."roomId" = ${roomId}
-        AND "m"."event" = 'connection'
+        AND "m"."event" LIKE 'connection'
     GROUP BY
-        TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
-    ORDER BY date
+    TO_CHAR("m"."createdAt", 'YYYY-MM-DD');
     `
 
 	const connections = await db.execute<RoomConnection>(query)
