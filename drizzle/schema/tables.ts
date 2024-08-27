@@ -53,7 +53,7 @@ export const metrics = pgTable('metric', {
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
 	event: text('event').notNull(),
-	connections: integer('connections').default(0).notNull(),
+	payload: text('payload'),
 	size: integer('size').default(0).notNull(),
 })
 
