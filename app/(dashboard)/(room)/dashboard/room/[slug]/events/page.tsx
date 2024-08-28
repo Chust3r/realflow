@@ -1,10 +1,19 @@
+import { Alert, AlertDescription, AlertTitle } from '~ui/alert'
+import { Console } from '~dashboard/room/events/console'
+
 function Page() {
 	return (
-		<section className='w-full h-full grid place-content-center'>
-			<p className='text-7xl font-extrabold text-accent-foreground/10'>
-				EVENTS
-			</p>
-		</section>
+		<article className='h-full flex flex-col gap-4'>
+			<Alert className='col-span-12 bg-accent/5'>
+				<AlertTitle>Events</AlertTitle>
+				<AlertDescription className='text-muted-foreground'>
+					Monitor and track real-time events emitted through your room.
+					Stay informed with live updates on every interaction and activity
+					within your communication network
+				</AlertDescription>
+			</Alert>
+			<Console />
+		</article>
 	)
 }
 

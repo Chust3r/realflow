@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useContext, createContext } from 'react'
 import { io, type Socket } from 'socket.io-client'
+import { resetEventStore, setPushEvent } from '~stores/events'
 
 interface SocketContext {
 	socket?: Socket
@@ -53,8 +54,20 @@ export function SocketProvider({ children, auth }: Props) {
 			console.error('Connection error:', error)
 		})
 
+		s.onAny((event, data) => {
+			setPushEvent({
+				date: (data['date'] as string) ?? '',
+				event,
+				payload:
+					typeof data['data'] === 'string'
+						? data['data']
+						: JSON.stringify(data['data']),
+			})
+		})
+
 		return () => {
 			s.disconnect()
+			resetEventStore()
 		}
 	}, [])
 
