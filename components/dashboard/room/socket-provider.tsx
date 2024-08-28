@@ -42,7 +42,7 @@ export function SocketProvider({ children, auth }: Props) {
 		})
 
 		s.on('connections', (data) => {
-			setCurrentConnections(data)
+			setCurrentConnections(data.data)
 		})
 
 		s.on('disconnect', (reason) => {
