@@ -12,7 +12,7 @@ export function Content({ children }: Props) {
 					<Indicator />
 				</div>
 			</div>
-			<main className='flex-1 flex-grow overflow-y-auto p-5'>
+			<main className='flex-grow overflow-y-auto p-5'>
 				{children}
 			</main>
 		</div>
