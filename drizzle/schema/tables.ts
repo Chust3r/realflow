@@ -21,7 +21,6 @@ export const messages = pgTable('message', {
 	roomId: text('roomId')
 		.notNull()
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
-	size: integer('size').default(0).notNull(),
 })
 
 export const requests = pgTable('request', {
@@ -54,7 +53,6 @@ export const metrics = pgTable('metric', {
 		.references(() => rooms.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
 	event: text('event').notNull(),
 	payload: text('payload'),
-	size: integer('size').default(0).notNull(),
 })
 
 export const rooms = pgTable(
