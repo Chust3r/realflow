@@ -20,10 +20,10 @@ export const columns: ColumnDef<Event>[] = [
 				onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 			>
 				<Button variant='ghost' size='xs'>
-					{column.getIsSorted() === 'asc' ? (
-						<CalendarArrowDown className='w-4 h-4 stroke-muted-foreground' />
-					) : (
+					{column.getIsSorted() === 'desc' ? (
 						<CalendarArrowUp className='w-4 h-4 stroke-muted-foreground' />
+					) : (
+						<CalendarArrowDown className='w-4 h-4 stroke-muted-foreground' />
 					)}
 				</Button>
 				<span>Date</span>
