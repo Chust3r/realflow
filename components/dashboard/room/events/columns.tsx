@@ -30,7 +30,11 @@ export const columns: ColumnDef<Event>[] = [
 			</div>
 		),
 		cell: ({ row }) => {
-			return formatDate(new Date(row.original.date), 'dd MMM yyyy HH:mm:ss')
+			return (
+				<span className='text-muted-foreground'>
+					{formatDate(new Date(row.original.date), 'dd MMM yyyy HH:mm:ss')}
+				</span>
+			)
 		},
 	},
 	{
@@ -55,8 +59,8 @@ export const columns: ColumnDef<Event>[] = [
 		),
 		cell: ({ row }) => (
 			<div className='flex items-center gap-2 justify-between'>
-				<span className='text-muted-foreground max-w-[350px] line-clamp-1'>
-					{row.original.payload ?? '-'}
+				<span className='text-muted-foreground max-w-[200px] text-center truncate'>
+					{row.original.payload}
 				</span>
 				<CopyToClipboard data={row.original.payload} />
 			</div>
