@@ -1,18 +1,22 @@
+'use client'
 import { Copy, Check } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '~ui/button'
 import { copyToClipboard } from '~lib/copy-to-clipboard'
+import { cn } from '~lib/utils'
 
 interface Props {
 	data: string
 	onCopy?: () => void
 	delay?: number
+	className?: string
 }
 
 export function CopyToClipboard({
 	data,
 	onCopy = () => {},
 	delay = 1000,
+	className,
 }: Props) {
 	const [isCopied, setIsCopied] = useState(false)
 
@@ -21,7 +25,7 @@ export function CopyToClipboard({
 
 		setIsCopied(true)
 
-        onCopy()
+		onCopy()
 
 		setTimeout(() => {
 			setIsCopied(false)
@@ -32,7 +36,7 @@ export function CopyToClipboard({
 		<Button
 			size='xs'
 			variant='ghost'
-			className='p-1.5 relative'
+			className={cn('p-1.5 relative', className)}
 			onClick={handleCopy}
 		>
 			<Copy
