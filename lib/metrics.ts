@@ -73,27 +73,24 @@ export const getMessages = async (roomId: string) => {
 	const query = sql`
     SELECT
         MIN("m"."createdAt") date,
-        COUNT("m"."id") messages
+        CAST(COUNT("m"."id") AS INTEGER) messages
     FROM
-        metric m
-    INNER JOIN room r ON "m"."roomId" = "r"."id"
+        message m
     WHERE
-        "r"."id" = ${roomId}
-        AND "m"."event" != 'connection'
+        "roomId" = ${roomId}
     GROUP BY
         TO_CHAR("m"."createdAt", 'YYYY-MM-DD')
-    ORDER BY date;
+    ORDER BY
+        date;
     `
 
 	const queryTotal = sql`
     SELECT
-        CAST(COUNT("m"."id") AS INTEGER) total
+        CAST(COUNT("id") AS INTEGER) total
     FROM
-        metric m
-    INNER JOIN room r ON "m"."roomId" = "r"."id"
+        message
     WHERE
-        "r"."id" = ${roomId}
-        AND "m"."event" != 'connection'
+        "roomId" = ${roomId};
     `
 
 	const messages = await db.execute<RoomMessage>(query)
