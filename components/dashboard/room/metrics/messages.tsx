@@ -32,7 +32,7 @@ export function MetricsMessages({ data = [], total = 0 }: Props) {
 				<div className='flex flex-col gap-1 py-3'>
 					<div className='flex items-center gap-1'>
 						<h2 className='text-muted-foreground text-sm'>
-							Messages Transferred
+							Stored Messages
 						</h2>
 					</div>
 					<h3 className='text-xl font-medium'>{total}</h3>
