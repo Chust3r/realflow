@@ -9,14 +9,14 @@ async function Page() {
 	const user = await getSession()
 
 	return (
-		<div className='w-full flex flex-col gap-3'>
+		<div className='w-full h-full flex flex-col gap-3'>
 			<div className='flex justify-between items-center'>
 				<ShowForm size='xs'>New room</ShowForm>
 			</div>
 			<h4 className='text-lg text-foreground font-medium tracking-tight'>
 				{user?.name}'s Rooms
 			</h4>
-			<section className='flex-1 flex-grow '>
+			<section className='flex-grow h-full'>
 				{rooms.length === 0 ? <NoRooms /> : <Rooms rooms={rooms} />}
 			</section>
 		</div>
