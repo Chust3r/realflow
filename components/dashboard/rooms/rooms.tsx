@@ -47,7 +47,7 @@ export function Rooms({ rooms }: Props) {
 						<div className='flex gap-2'>
 							<Mail className='w-4 h-4 stroke-muted-foreground' />
 							<span className='text-xs text-muted-foreground'>
-								{room.messages} messages transferred
+								{room.messages} messages stored
 							</span>
 						</div>
 					</div>

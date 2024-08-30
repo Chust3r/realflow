@@ -12,7 +12,7 @@ export const getRooms = async () => {
 		COUNT("m"."id") messages
   	FROM
 	room r
-		LEFT JOIN metric m ON "m"."roomId" = "r"."id"
+		LEFT JOIN message m ON "m"."roomId" = "r"."id"
   	WHERE
 		"r"."userId" = ${user?.id!}
   	GROUP BY "r"."id"`
