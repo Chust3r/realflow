@@ -2,14 +2,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Event } from '~stores/events'
 import { Button } from '~ui/button'
 import { Badge } from '~ui/badge'
-import {
-	CalendarArrowDown,
-	CalendarArrowUp,
-	CaseLower,
-	HardDriveDownload,
-} from 'lucide-react'
+import { CalendarArrowDown, CalendarArrowUp, CaseLower } from 'lucide-react'
 import { formatDate } from 'date-fns'
-import { CopyToClipboard } from '~ui/copy-to-clipboard'
 
 export const columns: ColumnDef<Event>[] = [
 	{
@@ -48,22 +42,5 @@ export const columns: ColumnDef<Event>[] = [
 		cell: ({ row }) => {
 			return <Badge variant='custom'>{row.original.event}</Badge>
 		},
-	},
-	{
-		accessorKey: 'payload',
-		header: () => (
-			<div className='flex items-center gap-2'>
-				<HardDriveDownload className='w-4 h-4 stroke-muted-foreground' />
-				<span>Payload</span>
-			</div>
-		),
-		cell: ({ row }) => (
-			<div className='flex items-center gap-2 justify-between'>
-				<span className='text-muted-foreground max-w-[200px] text-center truncate'>
-					{row.original.payload}
-				</span>
-				<CopyToClipboard data={row.original.payload} />
-			</div>
-		),
 	},
 ]

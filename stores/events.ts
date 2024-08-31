@@ -8,6 +8,7 @@ export type Event = {
 }
 interface EventStore {
 	events: Event[]
+	selectedEvent?: Record<string, any>
 }
 
 const eventStore = map<EventStore>({
@@ -20,8 +21,16 @@ export const setPushEvent = (newEvent: Event) => {
 	})
 }
 
+export const setEventStore = (newState: Partial<EventStore>) => {
+	eventStore.set({
+		...eventStore.get(),
+		...newState,
+	})
+}
+
 export const resetEventStore = () => {
 	eventStore.setKey('events', [])
+	eventStore.setKey('selectedEvent', undefined)
 }
 
 export const useEventStore = () => useStore(eventStore)

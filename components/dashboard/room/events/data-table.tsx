@@ -18,6 +18,7 @@ import {
 	TableRow,
 } from '~ui/table'
 import { useState } from 'react'
+import { useEventStore, setEventStore } from '~stores/events'
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -30,6 +31,8 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = useState<SortingState>([])
 
+	const { selectedEvent } = useEventStore()
+
 	const table = useReactTable({
 		data,
 		columns,
@@ -38,8 +41,25 @@ export function DataTable<TData, TValue>({
 		getSortedRowModel: getSortedRowModel(),
 		state: {
 			sorting,
-		}
+		},
 	})
+
+	const handleClick = (row: any) => {
+		const isSelected = row.id === selectedEvent?.id
+
+		if (!isSelected) {
+			setEventStore({
+				selectedEvent: {
+					id: row.id,
+					...row.original,
+				},
+			})
+		} else {
+			setEventStore({
+				selectedEvent: undefined,
+			})
+		}
+	}
 
 	return (
 		<Table>
@@ -66,7 +86,9 @@ export function DataTable<TData, TValue>({
 					table.getRowModel().rows.map((row) => (
 						<TableRow
 							key={row.id}
-							data-state={row.getIsSelected() && 'selected'}
+							data-state={row.id === selectedEvent?.id && 'selected'}
+							onClick={() => handleClick(row)}
+							className='cursor-pointer data-[state=selected]:bg-accent/20 hover:bg-accent/10'
 						>
 							{row.getVisibleCells().map((cell) => (
 								<TableCell key={cell.id}>
