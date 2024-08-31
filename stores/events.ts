@@ -4,7 +4,7 @@ import { map } from 'nanostores'
 export type Event = {
 	date: string
 	event: string
-	payload: string
+	payload: string | Record<string, any>
 }
 interface EventStore {
 	events: Event[]

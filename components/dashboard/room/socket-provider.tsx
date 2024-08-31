@@ -43,7 +43,7 @@ export function SocketProvider({ children, auth }: Props) {
 		})
 
 		s.on('connections', (data) => {
-			setCurrentConnections(data.data)
+			setCurrentConnections(data.payload)
 		})
 
 		s.on('disconnect', (reason) => {
@@ -58,10 +58,7 @@ export function SocketProvider({ children, auth }: Props) {
 			setPushEvent({
 				date: (data['date'] as string) ?? '',
 				event,
-				payload:
-					typeof data['data'] === 'string'
-						? data['data']
-						: JSON.stringify(data['data']),
+				payload: data['payload'],
 			})
 		})
 
