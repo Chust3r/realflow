@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 function Page() {
 	return (
-		<article className='overflow-x-hidden grid grid-cols-12 gap-4 max-w-4xl'>
+		<article className='overflow-x-hidden grid grid-cols-12 gap-4 max-w-4xl p-4'>
 			<Alert className='col-span-12 bg-accent/5'>
 				<AlertTitle>Quickstart</AlertTitle>
 				<AlertDescription className='text-muted-foreground'>
