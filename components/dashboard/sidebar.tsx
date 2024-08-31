@@ -8,9 +8,10 @@ import Link from 'next/link'
 interface Props {
 	slug: string
 	type: 'dashboard' | 'rooms'
+	children?: React.ReactNode
 }
 
-export async function Sidebar({ slug, type }: Props) {
+export async function Sidebar({ slug, type,children }: Props) {
 	const user = await getSession()
 
 	return (
@@ -26,6 +27,7 @@ export async function Sidebar({ slug, type }: Props) {
 				</Badge>
 			</div>
 			<SidebarItems type={type} slug={slug} />
+			{children}
 			<div className='border-t px-4 py-2 flex items-center w-full'>
 				<Profile
 					user={{
