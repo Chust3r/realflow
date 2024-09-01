@@ -11,15 +11,18 @@ import {
 import { Input } from '~ui/input'
 import { Button } from '~ui/button'
 import { useForm } from 'react-hook-form'
-import { object, string, InferInput, pipe, minLength } from 'valibot'
+import { object, string, InferInput, pipe, optional, minLength } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { updateRoom } from '~actions/room'
 import { useToast } from '~ui/use-toast'
 
 const schema = object({
 	id: string(),
-	name: pipe(string(), minLength(4,"Name must be at least 4 characters long")),
-	description: string(),
+	name: pipe(
+		string(),
+		minLength(4, 'Name must be at least 4 characters long')
+	),
+	description: optional(string()),
 })
 
 type FormValues = InferInput<typeof schema>
