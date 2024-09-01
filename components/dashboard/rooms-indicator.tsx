@@ -41,7 +41,7 @@ export function RoomsIndicator({ rooms,max }: Props) {
 	]
 
 	return (
-		<Card className='flex flex-col m-2 bg-accent/10'>
+		<Card className='flex flex-col bg-accent/10'>
 			<CardHeader className='items-center pb-0'>
 				<CardTitle className='text-sm'>Rooms Created</CardTitle>
 				<CardDescription className='text-xs text-center'>

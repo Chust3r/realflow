@@ -3,6 +3,7 @@ import { Badge } from '~ui/badge'
 import { SidebarItems } from '~dashboard/sidebar-items'
 import { Profile } from '~components/account/profile'
 import { getSession } from '~lib/session'
+
 import Link from 'next/link'
 
 interface Props {
@@ -11,12 +12,12 @@ interface Props {
 	children?: React.ReactNode
 }
 
-export async function Sidebar({ slug, type,children }: Props) {
+export async function Sidebar({ slug, type, children }: Props) {
 	const user = await getSession()
 
 	return (
 		<div className='w-60 border-r flex flex-col relative'>
-			<div className='h-12 max-h-12 border-b flex items-center px-6 gap-3 '>
+			<div className='h-12 min-h-12 border-b flex items-center px-6 gap-3'>
 				<Link href='/dashboard' className='flex items-center gap-3'>
 					<RealFlow className='w-7 h-7 stroke-foreground fill-foreground' />
 					<h4 className='text-lg truncate'>RealFlow</h4>
@@ -26,8 +27,10 @@ export async function Sidebar({ slug, type,children }: Props) {
 					beta
 				</Badge>
 			</div>
-			<SidebarItems type={type} slug={slug} />
-			{children}
+			<div className='flex-1 flex flex-col justify-between overflow-y-auto'>
+				<SidebarItems type={type} slug={slug} />
+				<div className='px-4 py-5'>{children}</div>
+			</div>
 			<div className='border-t px-4 py-2 flex items-center w-full'>
 				<Profile
 					user={{
