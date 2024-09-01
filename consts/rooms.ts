@@ -1,0 +1,1 @@
+export const MAX_ROOMS = +process.env.MAX_ROOMS! || 3

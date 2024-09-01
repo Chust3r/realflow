@@ -1,6 +1,7 @@
 import { Sidebar } from '~dashboard/sidebar'
 import { Content } from '~dashboard/content'
 import { Indicator } from '~dashboard/indicator'
+import { MaxRooms } from '~dashboard/max-rooms'
 
 interface Props {
 	children: React.ReactNode
@@ -22,7 +23,9 @@ export function DashboardLayout({ children }: Props) {
 			<div className='h-full flex relative'>
 				<span className='absolute w-full inset-0 h-10 -z-10 rounded-full blur-3xl bg-primary/20 -top-14 '></span>
 
-				<Sidebar slug='' type='dashboard'></Sidebar>
+				<Sidebar slug='' type='dashboard'>
+					<MaxRooms />
+				</Sidebar>
 				<Content top={<Header />}>{children}</Content>
 			</div>
 		</div>
