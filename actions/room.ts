@@ -7,6 +7,7 @@ import { db } from '~/lib/drizzle'
 import { schema } from '~drizzle/schema'
 import { revalidatePath } from 'next/cache'
 import { ServerActionResponse } from '~types'
+import { eq } from 'drizzle-orm'
 
 interface IValues {
 	name: string
@@ -64,6 +65,40 @@ export const createRoom = async (
 		return {
 			status: 'error',
 			message: 'Something went wrong',
+		}
+	}
+}
+
+interface Params {
+	id: string
+	name: string
+	description?: string
+}
+
+export const updateRoom = async ({
+	id,
+	name,
+	description,
+}: Params): Promise<ServerActionResponse> => {
+	try {
+		await db
+			.update(schema.rooms)
+			.set({
+				name,
+				description,
+			})
+			.where(eq(schema.rooms.id, id))
+
+		revalidatePath('/dashboard/room/:slug/settings')
+
+		return {
+			status: 'success',
+			message: 'Room updated succesfully',
+		}
+	} catch (e) {
+		return {
+			status: 'error',
+			message: 'Something went wrong while updating your room',
 		}
 	}
 }

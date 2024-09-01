@@ -1,10 +1,25 @@
-function Page() {
+import { RoomSettings } from '~dashboard/room/settings/room-settings'
+import { DangerZone } from '~dashboard/room/settings/danger-zone'
+import { getRoomBySlug } from 'lib/rooms'
+
+interface Props {
+	params: {
+		slug: string
+	}
+}
+
+async function Page({ params: { slug } }: Props) {
+	const room = await getRoomBySlug(slug)
+
 	return (
-		<section className='w-full h-full grid place-content-center'>
-			<p className='text-7xl font-extrabold text-accent-foreground/10'>
-				SETTINGS
-			</p>
-		</section>
+		<div className='overflow-x-hidden space-y-4 max-w-4xl p-4'>
+			<RoomSettings
+				id={room?.id!}
+				name={room?.name!}
+				description={room?.description!}
+			/>
+			<DangerZone />
+		</div>
 	)
 }
 
