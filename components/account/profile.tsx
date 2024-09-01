@@ -74,16 +74,16 @@ export function Profile({ user }: Props) {
 						System
 					</DropdownMenuRadioItem>
 					<DropdownMenuRadioItem
-						value='light'
-						className='text-muted-foreground text-xs'
-					>
-						Light
-					</DropdownMenuRadioItem>
-					<DropdownMenuRadioItem
 						value='dark'
 						className='text-muted-foreground text-xs'
 					>
 						Dark
+					</DropdownMenuRadioItem>
+					<DropdownMenuRadioItem
+						value='light'
+						className='text-muted-foreground text-xs'
+					>
+						Clasic
 					</DropdownMenuRadioItem>
 				</DropdownMenuRadioGroup>
 				<DropdownMenuSeparator />
