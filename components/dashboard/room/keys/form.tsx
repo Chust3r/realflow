@@ -37,7 +37,7 @@ import { format } from 'date-fns'
 import { cn } from '~lib/utils'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { Fragment } from 'react'
-
+import { Badge } from '~ui/badge'
 
 //→ FORM SCHEMA
 
@@ -260,14 +260,19 @@ export function CreateSecretKeys() {
 							<div className='px-6 py-7 space-y-10'>
 								<div className='flex flex-col gap-2'>
 									<div className='flex items-center justify-between'>
-										<p className='text-foreground text-sm font-medium'>
-											IP Address Restrictions
-										</p>
+										<div className='flex gap-2 items-center'>
+											<p>IP Address Restrictions</p>
+											<Badge variant='custom' className='relative'>
+												<span className='absolute inset-0 w-4 h-4 rounded-full bg-primary blur-2xl'></span>
+												in development
+											</Badge>
+										</div>
 										<Button
 											variant='ghost'
 											size='xs'
 											type='button'
 											onClick={handleAddIP}
+											disabled
 										>
 											<Plus className='w-4 h-4 opacity-50 mr-2' />
 											Add IP Address
