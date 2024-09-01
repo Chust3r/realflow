@@ -1,6 +1,10 @@
-import { Button } from '~ui/button'
+import { DeleteRoom } from './delete-room'
 
-export function DangerZone() {
+interface Props {
+	roomId: string
+}
+
+export function DangerZone({ roomId }: Props) {
 	return (
 		<section className='w-full rounded-lg border bg-accent/10'>
 			<div className='px-6 py-4 border-b flex items-center'>
@@ -20,13 +24,7 @@ export function DangerZone() {
 						information before proceeding. Only proceed if you fully
 						understand and accept the consequences of this action.
 					</span>
-					<Button
-						variant='destructive'
-						size='xs'
-						className='max-w-[200px] place-self-end'
-					>
-						Delete Room
-					</Button>
+					<DeleteRoom roomId={roomId}/>
 				</div>
 			</div>
 		</section>

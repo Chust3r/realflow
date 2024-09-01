@@ -18,7 +18,7 @@ async function Page({ params: { slug } }: Props) {
 				name={room?.name!}
 				description={room?.description!}
 			/>
-			<DangerZone />
+			<DangerZone roomId={room?.id!} />
 		</div>
 	)
 }
