@@ -71,7 +71,7 @@ export function RoomSettingsForm({ defaultValues }: Props) {
 						name='name'
 						render={({ field }) => (
 							<FormItem className='grid grid-cols-12 gap-x-6 items-center'>
-								<FormLabel className='col-span-4 text-sm'>
+								<FormLabel className='col-span-4 text-sm text-foreground'>
 									Room Name
 								</FormLabel>
 								<FormControl>
@@ -90,7 +90,7 @@ export function RoomSettingsForm({ defaultValues }: Props) {
 						name='description'
 						render={({ field }) => (
 							<FormItem className='grid grid-cols-12 gap-x-6 items-center'>
-								<FormLabel className='col-span-4 text-sm'>
+								<FormLabel className='col-span-4 text-sm text-foreground'>
 									Room Description
 								</FormLabel>
 								<FormControl>

@@ -12,14 +12,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '~ui/avatar'
 import { Input } from '~ui/input'
 import { Button } from '~ui/button'
 import { useForm } from 'react-hook-form'
-import { object, string, InferInput } from 'valibot'
+import { object, string, minLength, pipe, InferInput } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { TriangleAlert } from 'lucide-react'
 import { updateAccount } from '~actions/account'
 import { useToast } from '~ui/use-toast'
 
 const schema = object({
-	username: string(),
+	username: pipe(
+		string(),
+		minLength(4, 'Name must be at least 4 characters long')
+	),
 	email: string(),
 })
 
@@ -79,7 +82,7 @@ export function GeneralForm({ defaultValues, image }: Props) {
 						name='username'
 						render={({ field }) => (
 							<FormItem className='grid grid-cols-12 gap-x-6 items-center'>
-								<FormLabel className='col-span-4 text-sm'>
+								<FormLabel className='col-span-4 text-sm text-foreground'>
 									Username
 								</FormLabel>
 								<FormControl>
@@ -89,7 +92,7 @@ export function GeneralForm({ defaultValues, image }: Props) {
 									/>
 								</FormControl>
 								<FormDescription />
-								<FormMessage />
+								<FormMessage className='col-start-5 col-end-12 text-muted-foreground text-xs'/>
 							</FormItem>
 						)}
 					/>
