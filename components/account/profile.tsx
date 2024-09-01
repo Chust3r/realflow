@@ -31,20 +31,20 @@ export function Profile({ user }: Props) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className='w-full'>
+			<DropdownMenuTrigger>
 				<div
-					className='flex items-center gap-2 hover:bg-secondary/30 w-full px-2 py-1 rounded-lg'
+					className='flex items-center gap-2 hover:bg-secondary/30 px-2 py-1 rounded-lg'
 					role='combobox'
 				>
-					<Avatar className='w-8 h-8'>
+					<Avatar className='size-8 aspect-square'>
 						<AvatarImage src={user?.image!} />
 						<AvatarFallback>A</AvatarFallback>
 					</Avatar>
-					<div className='flex flex-col items-start'>
+					<div className='flex-grow flex flex-col items-start'>
 						<p className='text-sm font-medium truncate'>{user?.name!}</p>
-						<span className='text-xs text-muted-foreground truncate max-w-[200px]'>
+						<p className='text-xs text-muted-foreground max-w-[150px] truncate'>
 							{user?.email!}
-						</span>
+						</p>
 					</div>
 				</div>
 			</DropdownMenuTrigger>
