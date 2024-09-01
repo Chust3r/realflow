@@ -29,6 +29,7 @@ import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
 import { createRoom } from '~actions/room'
 import { useToast } from '~ui/use-toast'
+import { Badge } from '../ui/badge'
 
 //→ FORM SCHEMA
 
@@ -197,12 +198,22 @@ export function CreateRoom() {
 													<Checkbox
 														checked={field.value}
 														onCheckedChange={field.onChange}
+														disabled
 													/>
 												</FormControl>
 												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
 													<div className='flex items-center gap-2'>
 														<Database className='w-4 h-4' />
-														<p>Message Persistence</p>
+														<div className='flex gap-2 items-center'>
+															<p>Message Persistence</p>
+															<Badge
+																variant='custom'
+																className='relative'
+															>
+																<span className='absolute inset-0 w-4 h-4 rounded-full bg-primary blur-2xl'></span>
+																in development
+															</Badge>
+														</div>
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable this setting to store all
@@ -225,12 +236,22 @@ export function CreateRoom() {
 													<Checkbox
 														checked={field.value}
 														onCheckedChange={field.onChange}
+														disabled
 													/>
 												</FormControl>
 												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
 													<div className='flex items-center gap-2'>
 														<Webhook className='w-4 h-4' />
-														<p>Webhook Integration</p>
+														<div className='flex gap-2 items-center'>
+															<p>Webhook Integration</p>
+															<Badge
+																variant='custom'
+																className='relative'
+															>
+																<span className='absolute inset-0 w-4 h-4 rounded-full bg-primary blur-2xl'></span>
+																in development
+															</Badge>
+														</div>
 													</div>
 													<span className='text-muted-foreground/60 text-xs'>
 														Enable webhook support so users can
