@@ -39,7 +39,7 @@ export function GeneralForm({ defaultValues, image }: Props) {
 	const { toast } = useToast()
 
 	const {
-		formState: { isDirty, isSubmitting },
+		formState: { isSubmitting },
 		reset,
 		handleSubmit,
 	} = form
@@ -123,7 +123,10 @@ export function GeneralForm({ defaultValues, image }: Props) {
 					<Button
 						variant='ghost'
 						size='xs'
-						disabled={!isDirty || isSubmitting}
+						disabled={
+							defaultValues.username === form.getValues('username') ||
+							isSubmitting
+						}
 						onClick={() => reset()}
 					>
 						Cancel
@@ -131,7 +134,10 @@ export function GeneralForm({ defaultValues, image }: Props) {
 					<Button
 						type='submit'
 						size='xs'
-						disabled={!isDirty || isSubmitting}
+						disabled={
+							defaultValues.username === form.getValues('username') ||
+							isSubmitting
+						}
 					>
 						Save
 					</Button>
