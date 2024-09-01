@@ -31,7 +31,7 @@ export function Profile({ user }: Props) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger>
+			<DropdownMenuTrigger className='w-full'>
 				<div
 					className='flex items-center gap-2 hover:bg-secondary/30 px-2 py-1 rounded-lg'
 					role='combobox'
