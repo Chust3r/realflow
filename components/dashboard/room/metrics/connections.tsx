@@ -16,7 +16,7 @@ import { formatDate } from 'date-fns'
 const config: ChartConfig = {
 	connections: {
 		label: 'Connections',
-		color: '#171717',
+		color: 'hsl(var(--chart-4))',
 	},
 }
 

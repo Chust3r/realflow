@@ -12,11 +12,11 @@ import { RoomOrigin } from '~types'
 const config: ChartConfig = {
 	authorized: {
 		label: 'Authorized',
-		color: '#171717',
+		color: 'hsl(var(--chart-4))',
 	},
 	unauthorized: {
 		label: 'Unauthorized',
-		color: '#262626',
+		color: 'hsl(var(--chart-5))',
 	},
 	label: {
 		color: 'hsl(var(--foreground))',
