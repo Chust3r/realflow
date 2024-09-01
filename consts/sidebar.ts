@@ -1,7 +1,6 @@
 import {
 	Zap,
 	Router,
-	Webhook,
 	KeyRound,
 	Settings,
 	Server,
@@ -56,11 +55,6 @@ const roomItems = [
 		title: 'Events',
 		path: 'events',
 		icon: Router,
-	},
-	{
-		title: 'Webhooks',
-		path: 'webhooks',
-		icon: Webhook,
 	},
 	{
 		title: 'API keys',
