@@ -14,7 +14,6 @@ export const AuthForm = () => {
 				<div className='h-12 max-h-12 flex items-center gap-1.5 w-full'>
 					<RealFlow className='size-8 stroke-foreground fill-foreground' />
 					<h4 className='text-xl truncate'>RealFlow</h4>
-
 					<Badge variant='custom' className='relative'>
 						<span className='absolute inset-0 w-4 h-4 rounded-full bg-primary blur-2xl'></span>
 						beta
@@ -30,7 +29,6 @@ export const AuthForm = () => {
 						connections.
 					</span>
 				</div>
-
 				<div className='space-y-2'>
 					<Button onClick={() => google()} className='w-full'>
 						<Google className='w-4 h-4 mr-2' /> Continue with Google
