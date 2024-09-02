@@ -8,6 +8,7 @@ import { useToast } from '~ui/use-toast'
 import { SecretKeys } from './secret-keys'
 import { ShowForm } from './show-form'
 import { useState } from 'react'
+import { MAX_SECRET_KEYS } from '~consts/rooms'
 
 interface Props {
 	roomId: string
@@ -73,7 +74,7 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 							<ShowForm
 								size='xs'
 								roomId={roomId}
-								disabled={sk.length >= 3}
+								disabled={sk.length >= MAX_SECRET_KEYS}
 							>
 								New Secret Key
 							</ShowForm>
