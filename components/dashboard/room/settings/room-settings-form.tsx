@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { object, string, InferInput, pipe, optional, minLength } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { updateRoom } from '~actions/room'
-import { useToast } from '~ui/use-toast'
+import { toast} from 'sonner'
 
 const schema = object({
 	id: string(),
@@ -37,7 +37,6 @@ export function RoomSettingsForm({ defaultValues }: Props) {
 		defaultValues,
 	})
 
-	const { toast } = useToast()
 
 	const {
 		formState: { isSubmitting },

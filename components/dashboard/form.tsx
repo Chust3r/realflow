@@ -28,8 +28,8 @@ import { ConfirmDialog } from './confirm-dialog'
 import { useRoomStore, setRoomStore } from '~stores/room'
 import { Webhook, Database, Lock } from 'lucide-react'
 import { createRoom } from '~actions/room'
-import { useToast } from '~ui/use-toast'
-import { Badge } from '../ui/badge'
+import { Badge } from '~ui/badge'
+import { toast } from 'sonner'
 
 //→ FORM SCHEMA
 
@@ -66,8 +66,6 @@ export function CreateRoom() {
 	} = form
 
 	const { open } = useRoomStore()
-
-	const { toast } = useToast()
 
 	//→ SHEET HANDLERS
 

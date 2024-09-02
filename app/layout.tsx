@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '~components/theme/provider'
-import { Toaster } from '~ui/toaster'
+import { Toaster } from '~ui/sonner'
 import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 

@@ -4,11 +4,11 @@ import { SecretKey } from '~lib/types'
 import { maskKey } from '~lib/keys'
 import { switchEnableAuth } from '~actions/api-keys'
 import { CopyToClipboard } from '~ui/copy-to-clipboard'
-import { useToast } from '~ui/use-toast'
 import { SecretKeys } from './secret-keys'
 import { ShowForm } from './show-form'
 import { useState } from 'react'
 import { MAX_SECRET_KEYS } from '~consts/rooms'
+import { toast } from 'sonner'
 
 interface Props {
 	roomId: string
@@ -20,7 +20,6 @@ interface Props {
 export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 	const [disabled, setDisabled] = useState(false)
 
-	const { toast } = useToast()
 
 	const handleSwitch = async (value: boolean) => {
 		setDisabled(true)
