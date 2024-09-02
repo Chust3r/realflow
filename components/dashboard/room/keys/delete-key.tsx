@@ -20,11 +20,11 @@ export function DeleteKey({ id }: Props) {
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button
-					variant='destructive'
+					variant='ghost'
 					size='xs'
 					className='max-w-[200px] place-self-end'
 				>
-					<Trash className='size-4' />
+					<Trash className='size-4 stroke-muted-foreground' />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-[450px]'>
