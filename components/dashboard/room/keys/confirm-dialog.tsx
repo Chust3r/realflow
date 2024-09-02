@@ -22,7 +22,8 @@ export function ConfirmDialog({ reset }: Props) {
 			open={confirmOpen}
 			onOpenChange={(open) => setSecretStore({ confirmOpen: open })}
 		>
-			<DialogContent className='sm:max-w-[380px]'>
+			<DialogContent className='sm:max-w-[450px]'>
+			<span className='absolute top-0 right-0 blur-2xl w-10 h-10 bg-primary opacity-15'></span>
 				<DialogHeader className='flex flex-col gap-1.5 text-center sm:text-left py-4 px-5 border-b justify-center'>
 					<DialogTitle className='text-base'>Discard changes</DialogTitle>
 				</DialogHeader>
@@ -34,15 +35,14 @@ export function ConfirmDialog({ reset }: Props) {
 				</div>
 				<DialogFooter className='px-5 py-4 flex w-full'>
 					<Button
-						className='w-full'
-						variant='outline'
+						size="xs"
+						variant='ghost'
 						onClick={() => setSecretStore({ confirmOpen: false })}
 					>
 						Cancel
 					</Button>
 					<Button
-						className='w-full'
-						variant='secondary'
+						size='xs'
 						onClick={() => {
 							setSecretStore({
 								confirmOpen: false,
