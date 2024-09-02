@@ -56,15 +56,17 @@ export const createRoom = async (
 		revalidatePath('/dashboard/rooms')
 
 		return {
-			status: 'success',
-			message: 'Room created successfully',
+			ok: true,
+			title: 'Room created',
+			message: 'Your room has been created',
 		}
 	} catch (e) {
 		console.log(e)
 
 		return {
-			status: 'error',
-			message: 'Something went wrong',
+			ok: false,
+			title: 'Room creation failed',
+			message: 'Something went wrong while creating your room',
 		}
 	}
 }
@@ -92,12 +94,14 @@ export const updateRoom = async ({
 		revalidatePath('/dashboard/room/:slug/settings')
 
 		return {
-			status: 'success',
-			message: 'Room updated succesfully',
+			ok: true,
+			title: 'Room updated',
+			message: 'Your room has been updated',
 		}
 	} catch (e) {
 		return {
-			status: 'error',
+			ok: false,
+			title: 'Room update failed',
 			message: 'Something went wrong while updating your room',
 		}
 	}

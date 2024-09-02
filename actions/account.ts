@@ -27,12 +27,14 @@ export const updateAccount = async ({
 		revalidatePath('/account')
 
 		return {
-			status: 'success',
+			ok: true,
+			title: 'Account updated',
 			message: 'Your account has been updated',
 		}
 	} catch (e) {
 		return {
-			status: 'error',
+			ok: false,
+			title: 'Account update failed',
 			message: 'Something went wrong while updating your account',
 		}
 	}

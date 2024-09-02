@@ -31,6 +31,7 @@ export type RoomOrigin = {
 }
 
 export type ServerActionResponse = {
-	status: 'success' | 'error'
-	message?: string
+	ok: boolean
+	title: string
+	message: string
 }

@@ -36,14 +36,16 @@ export const switchEnableAuth = async (
 		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
-			status: 'success',
-			message: 'Successfully updated room api keys',
+			ok: true,
+			title: 'Success',
+			message: `Successfully ${enableAuth ? 'enabled' : 'disabled'} auth`,
 		}
 	} catch (e) {
 		console.error(e)
 
 		return {
-			status: 'error',
+			ok: false,
+			title: 'Error',
 			message: 'Something went wrong while updating your room api keys',
 		}
 	}
@@ -66,13 +68,15 @@ export const createSecretKey = async (
 		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
-			status: 'success',
+			ok: true,
+			title: 'Success',
 			message: 'Successfully created secret key',
 		}
 	} catch (e) {
 		console.error(e)
 		return {
-			status: 'error',
+			ok: false,
+			title: 'Error',
 			message: 'Something went wrong while creating your secret key',
 		}
 	}
@@ -94,13 +98,15 @@ export const removeSecretKey = async (
 		revalidatePath('/dashboard/room/[slug]/keys', 'page')
 
 		return {
-			status: 'success',
+			ok: true,
+			title: 'Success',
 			message: 'Successfully removed secret key',
 		}
 	} catch (e) {
 		console.error(e)
 		return {
-			status: 'error',
+			ok: false,
+			title: 'Error',
 			message: 'Something went wrong while removing your secret key',
 		}
 	}
