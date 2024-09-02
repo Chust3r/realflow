@@ -2,9 +2,10 @@ import { DeleteRoom } from './delete-room'
 
 interface Props {
 	roomId: string
+	roomName: string
 }
 
-export function DangerZone({ roomId }: Props) {
+export function DangerZone({ roomId,roomName }: Props) {
 	return (
 		<section className='w-full rounded-lg border bg-accent/10'>
 			<div className='px-6 py-4 border-b flex items-center'>
@@ -24,7 +25,7 @@ export function DangerZone({ roomId }: Props) {
 						information before proceeding. Only proceed if you fully
 						understand and accept the consequences of this action.
 					</span>
-					<DeleteRoom roomId={roomId}/>
+					<DeleteRoom roomId={roomId} roomName={roomName}/>
 				</div>
 			</div>
 		</section>
