@@ -1,6 +1,7 @@
 import React from 'react'
 import { NewsLetter } from '~/components/account/newsletter'
 import { Theme } from '~components/account/theme'
+import { type Metadata } from 'next'
 
 function Page() {
 	return (
@@ -12,3 +13,9 @@ function Page() {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Preferences',
+}

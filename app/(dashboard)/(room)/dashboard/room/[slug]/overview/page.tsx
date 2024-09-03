@@ -10,6 +10,7 @@ import { MetricsRequests } from '~dashboard/room/metrics/requests'
 import { MetricsConnections } from '~dashboard/room/metrics/connections'
 import { MetricsOrigin } from '~dashboard/room/metrics/origin'
 import { MetricsMessages } from '~dashboard/room/metrics/messages'
+import { Metadata } from 'next'
 
 interface Props {
 	params: {
@@ -51,3 +52,10 @@ async function Page({ params }: Props) {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Overview',
+}
+

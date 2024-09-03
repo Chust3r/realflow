@@ -2,6 +2,7 @@ import { Alert, AlertDescription, AlertTitle } from '~ui/alert'
 import { CodeBlock } from '~ui/code-block'
 import { code, client, listen, emit} from '~consts/quickstart'
 import Link from 'next/link'
+import { Metadata } from 'next'
 
 function Page() {
 	return (
@@ -81,3 +82,10 @@ function Page() {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Quickstart',
+}
+

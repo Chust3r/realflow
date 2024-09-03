@@ -1,4 +1,5 @@
 import { TwoFactorAuth } from '~components/account/two-factor-auth'
+import { type Metadata } from 'next'
 
 function Page() {
 	return (
@@ -9,3 +10,9 @@ function Page() {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Security',
+}

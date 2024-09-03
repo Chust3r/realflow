@@ -1,5 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from '~ui/alert'
 import { Console } from '~dashboard/room/events/console'
+import { Metadata } from 'next'
 
 function Page() {
 	return (
@@ -18,3 +19,10 @@ function Page() {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Events',
+}
+

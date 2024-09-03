@@ -1,4 +1,5 @@
 import { Grid } from '~ui/grid'
+import type { Metadata } from 'next'
 
 interface Props {
 	children: React.ReactNode
@@ -21,3 +22,12 @@ function Layout({ children }: Props) {
 }
 
 export default Layout
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: {
+		template: 'RealFlow | %s',
+		default: 'RealFlow | A Open Source Project for real-time communication',
+	},
+}

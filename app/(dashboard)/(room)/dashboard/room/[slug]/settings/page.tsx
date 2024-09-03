@@ -1,6 +1,7 @@
 import { RoomSettings } from '~dashboard/room/settings/room-settings'
 import { DangerZone } from '~dashboard/room/settings/danger-zone'
 import { getRoomBySlug } from 'lib/rooms'
+import { Metadata } from 'next'
 
 interface Props {
 	params: {
@@ -25,3 +26,10 @@ async function Page({ params: { slug } }: Props) {
 }
 
 export default Page
+
+//→ metadata
+
+export const metadata: Metadata = {
+	title: 'Settings',
+}
+
