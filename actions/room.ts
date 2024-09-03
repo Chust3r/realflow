@@ -107,5 +107,6 @@ export const updateRoom = async ({
 	}
 }
 
+//→ TODO: Delete Room & clean up in WS server (Close all connections & emit event to all clients)
 
-export const deleteRoom = ()=>{}
+export const deleteRoom = () => {}

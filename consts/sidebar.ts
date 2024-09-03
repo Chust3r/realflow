@@ -6,7 +6,6 @@ import {
 	Server,
 	ShieldCheck,
 	AppWindowMac,
-	Ticket,
 	UserRound,
 	House,
 } from 'lucide-react'
@@ -26,12 +25,6 @@ export const items = [
 		title: 'Preferences',
 		path: '/dashboard/account/preferences',
 		icon: AppWindowMac,
-	},
-
-	{
-		title: 'Access tokens',
-		path: '/dashboard/account/tokens',
-		icon: Ticket,
 	},
 	{
 		title: 'Security',
