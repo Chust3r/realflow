@@ -1,6 +1,6 @@
 import { RealFlow } from '~icons'
 import { Badge } from '~ui/badge'
-import { Button } from '~ui/button'
+import { SignupOrDashboard } from './signupOrDashboard'
 
 export function Header() {
 	return (
@@ -14,9 +14,9 @@ export function Header() {
 						beta
 					</Badge>
 				</div>
-				<Button size='xs' variant="secondary">
-					Dashboard
-				</Button>
+				<div>
+					<SignupOrDashboard />
+				</div>
 			</div>
 		</header>
 	)
