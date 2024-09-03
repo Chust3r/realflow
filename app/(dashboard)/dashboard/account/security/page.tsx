@@ -1,8 +1,10 @@
+import { TwoFactorAuth } from '~components/account/two-factor-auth'
+
 function Page() {
 	return (
-		<div className='w-full h-full grid place-items-center'>
-			<p className='text-7xl font-extrabold text-accent-foreground/10'>account/security</p>
-		</div>
+		<article className='max-w-4xl h-fit p-4 space-y-8'>
+			<TwoFactorAuth />
+		</article>
 	)
 }
 
