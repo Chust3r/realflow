@@ -22,7 +22,7 @@ export function DeleteRoom({ roomId, roomName }: Props) {
 
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
+			<DialogTrigger asChild disabled>
 				<Button
 					variant='destructive'
 					size='xs'
