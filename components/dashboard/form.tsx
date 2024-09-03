@@ -82,19 +82,18 @@ export function CreateRoom() {
 	}
 
 	const handleSubmit = async (values: FormValues) => {
-		const res = await createRoom(values)
+		const { ok, title, message } = await createRoom(values)
 
-		if (res.status === 'success') {
-			toast({
-				title: 'Room created',
-				description: res.message || 'Your room has been created',
+		if (ok)
+			toast.success(title, {
+				description: message,
 			})
-		} else {
-			toast({
-				title: 'Room creation failed',
-				description: res.message || 'Your room could not be created',
+
+		if (!ok)
+			toast.error(title, {
+				description: message,
 			})
-		}
+
 		setRoomStore({ open: false })
 		reset()
 	}

@@ -16,7 +16,7 @@ import { object, string, minLength, pipe, InferInput } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { TriangleAlert } from 'lucide-react'
 import { updateAccount } from '~actions/account'
-import { useToast } from '~ui/use-toast'
+import { toast } from 'sonner'
 
 const schema = object({
 	username: pipe(
@@ -39,8 +39,6 @@ export function GeneralForm({ defaultValues, image }: Props) {
 		defaultValues,
 	})
 
-	const { toast } = useToast()
-
 	const {
 		formState: { isSubmitting },
 		reset,
@@ -48,19 +46,17 @@ export function GeneralForm({ defaultValues, image }: Props) {
 	} = form
 
 	const handleFormSubmit = async (data: FormValues) => {
-		const res = await updateAccount(data)
+		const { ok, title, message } = await updateAccount(data)
 
-		if (res.status === 'success') {
-			toast({
-				title: 'Account updated',
-				description: res.message || 'Your account has been updated.',
-			})
-		} else {
-			toast({
-				title: 'Account update failed',
-				description: res.message || 'Your account could not be updated.',
-			})
-		}
+		if(ok) toast.success(title, {
+			description: message,
+		})
+
+		if(!ok) toast.error(title, {
+			description: message,
+		})
+
+
 	}
 
 	return (

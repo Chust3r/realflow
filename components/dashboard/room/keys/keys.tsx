@@ -23,7 +23,17 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 
 	const handleSwitch = async (value: boolean) => {
 		setDisabled(true)
-		await switchEnableAuth(roomId, value)
+
+		const { ok, title, message } = await switchEnableAuth(roomId, value)
+
+		if(ok) toast.success(title, {
+			description: message,
+		})
+
+		if(!ok) toast.error(title, {
+			description: message,
+		})
+
 		setDisabled(false)
 	}
 

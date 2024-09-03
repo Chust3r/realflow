@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { object, string, InferInput, pipe, optional, minLength } from 'valibot'
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { updateRoom } from '~actions/room'
-import { toast} from 'sonner'
+import { toast } from 'sonner'
 
 const schema = object({
 	id: string(),
@@ -37,7 +37,6 @@ export function RoomSettingsForm({ defaultValues }: Props) {
 		defaultValues,
 	})
 
-
 	const {
 		formState: { isSubmitting },
 		reset,
@@ -45,19 +44,16 @@ export function RoomSettingsForm({ defaultValues }: Props) {
 	} = form
 
 	const handleFormSubmit = async (data: FormValues) => {
-		const res = await updateRoom(data)
+		const { ok, title, message } = await updateRoom(data)
 
-		if (res.status === 'success') {
-			toast({
-				title: 'Account updated',
-				description: res.message,
-			})
-		} else {
-			toast({
-				title: 'Account update failed',
-				description: res.message,
-			})
-		}
+		if(ok) toast.success(title, {
+			description: message,
+		})
+
+		if(!ok) toast.error(title, {
+			description: message,
+		})
+
 	}
 
 	return (

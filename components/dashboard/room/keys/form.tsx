@@ -30,7 +30,6 @@ import { ConfirmDialog } from './confirm-dialog'
 import { useSecretStore, setSecretStore } from '~stores/secret'
 import { Plus, Trash } from 'lucide-react'
 import { createSecretKey } from '~actions/api-keys'
-import { useToast } from '~ui/use-toast'
 import { Popover, PopoverContent, PopoverTrigger } from '~ui/popover'
 import { Calendar } from '~ui/calendar'
 import { format } from 'date-fns'
@@ -38,6 +37,7 @@ import { cn } from '~lib/utils'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { Fragment } from 'react'
 import { Badge } from '~ui/badge'
+import { toast } from 'sonner'
 
 //→ FORM SCHEMA
 
@@ -86,8 +86,6 @@ export function CreateSecretKeys() {
 
 	const { open } = useSecretStore()
 
-	const { toast } = useToast()
-
 	const { roomId } = useSecretStore()
 
 	const handleAddIP = () => {
@@ -112,7 +110,7 @@ export function CreateSecretKeys() {
 		reset()
 	}
 	const handleSubmit = async (values: FormValues) => {
-		const res = await createSecretKey({
+		const { ok, title, message } = await createSecretKey({
 			roomId,
 			adresses: values.ipAddresses.map((ip) => ip.ipAddress),
 			description: values.description,
@@ -121,17 +119,16 @@ export function CreateSecretKeys() {
 				: undefined,
 		})
 
-		if (res.status === 'success') {
-			toast({
-				title: 'Room created',
-				description: res.message || 'Your room has been created',
+		if (ok)
+			toast.success(title, {
+				description: message,
 			})
-		} else {
-			toast({
-				title: 'Room creation failed',
-				description: res.message || 'Your room could not be created',
+
+		if (!ok)
+			toast.error(title, {
+				description: message,
 			})
-		}
+
 		setSecretStore({ open: false })
 		reset()
 	}
