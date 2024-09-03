@@ -106,3 +106,6 @@ export const updateRoom = async ({
 		}
 	}
 }
+
+
+export const deleteRoom = ()=>{}

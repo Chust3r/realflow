@@ -10,12 +10,29 @@ import {
 } from '~ui/dialog'
 import { Button } from '~ui/button'
 import { Trash } from 'lucide-react'
+import { removeSecretKey } from '~actions/api-keys'
+import { toast } from 'sonner'
 
 interface Props {
+	roomId: string
 	id: string
 }
 
-export function DeleteKey({ id }: Props) {
+export function DeleteKey({ id, roomId }: Props) {
+	const deleteSecretKey = async () => {
+		const { ok, title, message } = await removeSecretKey(roomId, id)
+
+		if (ok)
+			toast.success(title, {
+				description: message,
+			})
+
+		if (!ok)
+			toast.error(title, {
+				description: message,
+			})
+	}
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -37,9 +54,8 @@ export function DeleteKey({ id }: Props) {
 				<div className='px-5 py-4 border-b flex flex-col gap-2'>
 					<div>
 						<p className='text-sm text-muted-foreground'>
-							This action is permanent and will remove all data
-							associated with the room, including messages and settings.
-							This cannot be undone
+							This action is irreversible, and any services or
+							integrations depending on this key will no longer function.
 						</p>
 					</div>
 				</div>
@@ -49,7 +65,11 @@ export function DeleteKey({ id }: Props) {
 							Cancel
 						</Button>
 					</DialogClose>
-					<Button size='xs' variant='destructive'>
+					<Button
+						size='xs'
+						variant='destructive'
+						onClick={deleteSecretKey}
+					>
 						Delete
 					</Button>
 				</DialogFooter>

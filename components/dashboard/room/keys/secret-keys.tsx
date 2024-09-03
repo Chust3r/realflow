@@ -14,9 +14,10 @@ import { formatDate } from 'date-fns'
 
 interface Props {
 	secretKeys: SecretKey[]
+	roomId:string
 }
 
-export function SecretKeys({ secretKeys }: Props) {
+export function SecretKeys({ secretKeys,roomId }: Props) {
 	return (
 		<Table aria-label='Secret Keys'>
 			<TableHeader>
@@ -46,7 +47,7 @@ export function SecretKeys({ secretKeys }: Props) {
 						<TableCell>
 							<div className='flex item-center gap-2 justify-end'>
 								<CopyToClipboard data={value} />
-								{i !== 0 && <DeleteKey id={id} />}
+								{i !== 0 && <DeleteKey id={id} roomId={roomId}/>}
 							</div>
 						</TableCell>
 					</TableRow>

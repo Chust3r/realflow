@@ -89,7 +89,7 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 							</ShowForm>
 						</div>
 					</div>
-					<SecretKeys secretKeys={sk} />
+					<SecretKeys secretKeys={sk} roomId={roomId}/>
 				</div>
 			)}
 		</section>
