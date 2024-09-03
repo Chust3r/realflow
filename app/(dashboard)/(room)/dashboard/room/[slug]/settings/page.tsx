@@ -10,6 +10,7 @@ interface Props {
 
 async function Page({ params: { slug } }: Props) {
 	const room = await getRoomBySlug(slug)
+	
 
 	return (
 		<div className='overflow-x-hidden space-y-4 max-w-4xl p-4'>

@@ -1,6 +1,7 @@
 import { SocketProvider } from '~/components/dashboard/room/socket-provider'
 import { RoomLayout } from '~layouts/room'
 import { getRoomAccess } from '~lib/rooms'
+import { notFound } from 'next/navigation'
 
 interface Props {
 	children: React.ReactNode
@@ -12,9 +13,7 @@ interface Props {
 async function Layout({ children, params }: Props) {
 	const room = await getRoomAccess(params.slug)
 
-	if (room?.secretkeys.length === 0) {
-		return
-	}
+	if (!room || !room?.secretkeys.length) notFound()
 
 	return (
 		<SocketProvider
