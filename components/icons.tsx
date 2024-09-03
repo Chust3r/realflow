@@ -42,44 +42,6 @@ export const Github = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 )
 
-export const UserCircle = (props: SVGProps<SVGSVGElement>) => (
-	<svg
-		xmlns='http://www.w3.org/2000/svg'
-		fill='none'
-		width='1em'
-		height='1em'
-		viewBox='0 0 24 24'
-		strokeWidth={1.5}
-		stroke='currentColor'
-		{...props}
-	>
-		<path
-			strokeLinecap='round'
-			strokeLinejoin='round'
-			d='M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
-		/>
-	</svg>
-)
-
-export const LogOut = (props: SVGProps<SVGSVGElement>) => (
-	<svg
-		xmlns='http://www.w3.org/2000/svg'
-		width='1em'
-		height='1em'
-		viewBox='0 0 24 24'
-		fill='none'
-		stroke='currentColor'
-		strokeWidth='1'
-		strokeLinecap='round'
-		strokeLinejoin='round'
-		{...props}
-	>
-		<path d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4' />
-		<polyline points='16 17 21 12 16 7' />
-		<line x1='21' x2='9' y1='12' y2='12' />
-	</svg>
-)
-
 export const RealFlow = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		width='1em'
@@ -90,5 +52,75 @@ export const RealFlow = (props: SVGProps<SVGSVGElement>) => (
 		{...props}
 	>
 		<path d='M186 447.471V154H318.062C336.788 154 353.697 158.053 368.79 166.158C384.163 174.263 396.181 185.443 404.845 199.698C413.51 213.672 417.842 229.604 417.842 247.491C417.842 265.938 413.51 282.568 404.845 297.381C396.181 311.915 384.302 323.375 369.209 331.759C354.117 340.144 337.067 344.337 318.062 344.337H253.917V447.471H186ZM348.667 447.471L274.041 314.99L346.99 304.509L430 447.471H348.667ZM253.917 289.835H311.773C319.04 289.835 325.329 288.298 330.639 285.223C336.229 281.869 340.421 277.258 343.216 271.388C346.291 265.519 347.828 258.811 347.828 251.265C347.828 243.718 346.151 237.15 342.797 231.56C339.443 225.691 334.552 221.219 328.124 218.144C321.975 215.07 314.428 213.533 305.484 213.533H253.917V289.835Z' />
+	</svg>
+)
+
+export const Nextjs = (props: SVGProps<SVGSVGElement>) => (
+	<svg
+		width='1em'
+		height='1em'
+		viewBox='0 0 180 180'
+		fill='none'
+		xmlns='http://www.w3.org/2000/svg'
+		{...props}
+	>
+		<mask
+			id='mask0_408_139'
+			style={{
+				maskType: 'alpha',
+			}}
+			maskUnits='userSpaceOnUse'
+			x={0}
+			y={0}
+			width={180}
+			height={180}
+		>
+			<circle cx={90} cy={90} r={90} fill='black' />
+		</mask>
+		<g mask='url(#mask0_408_139)'>
+			<circle
+				cx={90}
+				cy={90}
+				r={87}
+				fill='black'
+				stroke='white'
+				strokeWidth={6}
+			/>
+			<path
+				d='M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z'
+				fill='url(#paint0_linear_408_139)'
+			/>
+			<rect
+				x={115}
+				y={54}
+				width={12}
+				height={72}
+				fill='url(#paint1_linear_408_139)'
+			/>
+		</g>
+		<defs>
+			<linearGradient
+				id='paint0_linear_408_139'
+				x1={109}
+				y1={116.5}
+				x2={144.5}
+				y2={160.5}
+				gradientUnits='userSpaceOnUse'
+			>
+				<stop stopColor='white' />
+				<stop offset={1} stopColor='white' stopOpacity={0} />
+			</linearGradient>
+			<linearGradient
+				id='paint1_linear_408_139'
+				x1={121}
+				y1={54}
+				x2={120.799}
+				y2={106.875}
+				gradientUnits='userSpaceOnUse'
+			>
+				<stop stopColor='white' />
+				<stop offset={1} stopColor='white' stopOpacity={0} />
+			</linearGradient>
+		</defs>
 	</svg>
 )
