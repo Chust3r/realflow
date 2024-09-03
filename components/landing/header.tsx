@@ -1,6 +1,7 @@
 import { RealFlow } from '~icons'
 import { Badge } from '~ui/badge'
 import { SignupOrDashboard } from './signupOrDashboard'
+import { GithubStars } from './githubStars'
 
 export function Header() {
 	return (
@@ -14,7 +15,8 @@ export function Header() {
 						beta
 					</Badge>
 				</div>
-				<div>
+				<div className='flex items-center gap-3'>
+					<GithubStars />
 					<SignupOrDashboard />
 				</div>
 			</div>
