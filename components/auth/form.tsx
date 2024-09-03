@@ -3,7 +3,6 @@
 import { Github, Google } from '~icons'
 import { Button } from '~ui/button'
 import { github, google } from '~actions/auth'
-import { Grid } from '~/components/ui/grid'
 import { RealFlow } from '~icons'
 import { Badge } from '~ui/badge'
 
@@ -39,14 +38,6 @@ export const AuthForm = () => {
 					</Button>
 				</div>
 			</div>
-			<Grid
-				strokeDasharray={'4 2'}
-				width={80}
-				height={80}
-				className='[mask-image:radial-gradient(400px_circle_at_center,white,transparent)] inset-x-0 inset-y-[-30%] h-[200%] skew-y-12'
-			/>
-			<span className='absolute inset-0 w-full h-5 rounded-full bg-primary opacity-30 blur-3xl -top-5'></span>
-			<span className='absolute w-full h-5 rounded-full bg-primary opacity-20 blur-3xl -bottom-5'></span>
 		</section>
 	)
 }
