@@ -55,7 +55,7 @@ export const RealFlow = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 )
 
-export const Nextjs = (props: SVGProps<SVGSVGElement>) => (
+export const NextJS = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		width='1em'
 		height='1em'
