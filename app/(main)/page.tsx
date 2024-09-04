@@ -4,7 +4,7 @@ import { Footer } from '~components/landing/footer'
 
 function Page() {
 	return (
-		<section className='w-full h-full flex flex-col'>
+		<section className='w-full min-h-screen h-full flex flex-col'>
 			<Header />
 			<Content />
 			<Footer/>

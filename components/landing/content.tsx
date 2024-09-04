@@ -4,7 +4,7 @@ import { Github } from '~icons'
 
 export function Content() {
 	return (
-		<section className='w-full h-full mx-auto max-w-5xl flex flex-col items-center justify-center gap-8 flex-grow'>
+		<section className='w-full h-full mx-auto max-w-5xl flex flex-col items-center justify-center gap-8 flex-grow py-2'>
 			<div className='max-w-4xl flex flex-col gap-3 items-center'>
 				<h1 className='text-5xl tracking-wide font-medium text-center text-balance'>
 					Effortless WebSocket Management
