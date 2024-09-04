@@ -32,7 +32,7 @@ export const AuthForm = () => {
 					<Button onClick={() => google()} className='w-full'>
 						<Google className='w-4 h-4 mr-2' /> Continue with Google
 					</Button>
-					<Button className='w-full'>
+					<Button className='w-full' onClick={() => github()}>
 						<Github className='w-4 h-4 mr-2 fill-black' /> Continue with
 						Github
 					</Button>
