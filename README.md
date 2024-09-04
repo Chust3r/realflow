@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+    <img src="./public/images/realflow.png" alt="RealFlow metrics"/>
+</div>
 
-## Getting Started
+# Realflow
 
-First, run the development server:
+**Realflow** is a real-time communication platform that enables the creation of customized channels for bidirectional message transmission. Inspired by services like Pusher, Realflow offers full control over channel configurations, including authentication, message retention, and detailed metrics.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-  [Features](#features)
+-  [Technologies](#technologies)
+-  [Requeriments](#requeriments)
+-  [Installation](#installation)
+-  [Usage](#usage)
+-  [Contributing](#contributing)
+-  [License](#license)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+-  **Custom Channels**: Create channels with authentication, connection limits (_in development_, max limits are customizable in local development), and more.
+-  **Real-time Metrics**: Monitor channel usage with detailed metrics.
+-  **Message Retention**: Save and access historical messages in your channels (_in development_).
+-  **Security**: Credential-based authentication with public and secret keys.
+-  **User-friendly Interface**: Intuitive dashboard for managing and monitoring your channels.
+-  **Real-time Communication**: Real-time communication with WebSockets or other protocols contained in [Socket.IO](https://socket.io).
+-  **Event**: Visualize events in real-time.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**This project uses the following technologies:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-  **Next.js 14 App Router** (The React Framework for the Web)
+-  **Auth.js v5** (Authentication for the Web.
+   Free and open source)
+-  **Drizzle ORM** (Drizzle ORM is a headless TypeScript ORM with a head)
+-  **Shadcn UI** (Beautifully designed components that you can copy and paste into your apps.)
+-  **Nanostores** (A tiny state manager for React, React Native, Preact, Vue, Svelte, Solid, Lit, Angular, and vanilla JS.)
+- **Socket IO** (Real-time communication with WebSockets or other protocols)
 
-## Deploy on Vercel
+## Requeriments
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-  **Node.js v18 or higher**
+-  **Bun v0.2.0 or higher**
+-  **PostgreSQL v14 or higher**
+-  **Visual Studio Code**
+- **RealFlow backend** [required](https://github.com/Chust3r/realflow-back)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/realflow.git
+   cd realflow
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   bun install
+   ```
+
+3. Set up environment variables like the following:
+
+   ```
+
+    # AUTH JS 
+
+    AUTH_SECRET=
+
+    DATABASE_URL="postgresql://postgres:postgres@localhost:5432/{YOUR_DATABASE_NAME}"
+
+    # AUTH PROVIDERS
+
+    AUTH_GOOGLE_ID = 
+    AUTH_GOOGLE_SECRET = 
+
+    GITHUB_ID=
+    GITHUB_CLIENT_SECRET=
+
+    # REALFLOW BACKEND URL
+
+    NEXT_PUBLIC_WS_URL = {YOUR_WEBSOCKET_URL}
+
+    # LIMITS
+
+    MAX_ROOMS = 3
+    MAX_CONNECTIONS = 20
+    MAX_SECRET_KEYS = 3
+   
+   ```
+
+4. Run database migrations:
+
+   ```bash
+   bun db:migrate
+   ```
+
+5. Start the application:
+
+   ```bash
+   bun dev
+   ```
+
+## Usage
+
+### Creating a Channel
+
+You can create a channel using the Realflow dashboard. Simply go to the **Dashboard** section and follow the instructions to set up your first channel.
+
+<div align="center"><img src="./public/images/realflow-dashboard.png" alt="RealFlow dashboard"/></div>
+
+### Channel Authentication (in development)
+
+You can protected your channels with authentication, generate a public and secret key, and manage them in the Realflow dashboard.
+
+<div align="center"><img src="./public/images/realflow-dashboard-auth.png" alt="RealFlow dashboard"/></div>
+
+### Real-time Metrics
+
+You can monitor channel usage with detailed metrics in the Realflow dashboard.
+
+div align="center"><img src="./public/images/realflow-dashboard-metrics.png" alt="RealFlow dashboard"/></div>
+
+
+### Events
+
+Events are visualized in real-time in the Realflow dashboard.
+
+<div align="center"><img src="./public/images/realflow-dashboard-events.png" alt="RealFlow dashboard"/></div>
+
+
+## Contributing
+
+<a href="https://github.com/Chust3r/realflow/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Chust3r/realflow" />
+</a>
+
+## License
+
+[GPL-3.0 License](https://github.com/Chust3r/realflow/blob/main/LICENSE) 
