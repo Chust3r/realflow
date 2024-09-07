@@ -79,11 +79,10 @@ export const rooms = pgTable(
 				onDelete: 'restrict',
 				onUpdate: 'cascade',
 			}),
-		saveMessages: boolean('saveMessages').default(false).notNull(),
-		enableAuth: boolean('enableAuth').default(false).notNull(),
-		enableWebHooks: boolean('enableWebHooks').default(false).notNull(),
+		messagePersistence: boolean('messagePersistence').default(false).notNull(),
+		webhook: boolean('webhook').default(false).notNull(),
 		webhookUrl: text('webhookUrl'),
-		maxSimultaneousConnections: integer('maxSimultaneousConnections')
+		maxConnections: integer('maxConnections')
 			.default(20)
 			.notNull(),
 		publicKey: text('publicKey').notNull(),
