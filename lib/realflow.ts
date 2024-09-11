@@ -94,9 +94,9 @@ export class Client {
 					if (event === 'auth') {
 						this.isAuthenticated = rest.payload?.ok ?? false
 						if (this.isAuthenticated) this.flushQueue()
+					} else {
+						this.trigger('*', { event, ...rest })
 					}
-
-					this.trigger('*', { event, ...rest })
 
 					this.trigger(event, { event, ...rest })
 				} catch (e) {

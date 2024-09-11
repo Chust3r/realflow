@@ -40,8 +40,8 @@ export function Rooms({ rooms }: Props) {
 						<div className='flex gap-2'>
 							<EthernetPort className='w-4 h-4 stroke-muted-foreground' />
 							<span className='text-xs text-muted-foreground'>
-								{room.connections}/{room.maxSimultaneousConnections}{' '}
-								connections active
+								{room.connections}/{room.maxConnections} connections
+								active
 							</span>
 						</div>
 						<div className='flex gap-2'>
