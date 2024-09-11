@@ -2,7 +2,7 @@ import { useStore } from '@nanostores/react'
 import { map } from 'nanostores'
 
 export type Event = {
-	date: string
+	timestamp: string
 	event: string
 	payload: string | Record<string, any>
 }
@@ -16,6 +16,8 @@ const eventStore = map<EventStore>({
 })
 
 export const setPushEvent = (newEvent: Event) => {
+	console.log(newEvent)
+
 	eventStore.set({
 		events: [...eventStore.get().events, newEvent],
 	})

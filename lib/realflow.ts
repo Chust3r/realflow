@@ -7,6 +7,7 @@ interface EventMap {
 	connect: (data: Event) => void
 	disconnect: (data: CloseEvent) => void
 	error: (data: Error) => void
+	message: (data: MessageEvent) => void
 }
 
 interface IMessage {
@@ -95,6 +96,8 @@ export class Client {
 						if (this.isAuthenticated) this.flushQueue()
 					}
 
+					this.trigger('*', { event, ...rest })
+
 					this.trigger(event, { event, ...rest })
 				} catch (e) {
 					this.trigger('error', {
@@ -148,5 +151,9 @@ export class Client {
 		}
 
 		this.ws.send(JSON.stringify(m))
+	}
+
+	public disconnect() {
+		this.ws.close()
 	}
 }

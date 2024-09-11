@@ -7,7 +7,7 @@ import { formatDate } from 'date-fns'
 
 export const columns: ColumnDef<Event>[] = [
 	{
-		accessorKey: 'date',
+		accessorKey: 'timestamp',
 		header: ({ column }) => (
 			<div
 				className='flex items-center gap-2'
@@ -26,7 +26,10 @@ export const columns: ColumnDef<Event>[] = [
 		cell: ({ row }) => {
 			return (
 				<span className='text-muted-foreground'>
-					{formatDate(new Date(row.original.date), 'dd MMM yyyy HH:mm:ss')}
+					{formatDate(
+						new Date(row.original.timestamp),
+						'dd MMM yyyy HH:mm:ss'
+					)}
 				</span>
 			)
 		},
