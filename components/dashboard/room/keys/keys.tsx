@@ -1,5 +1,4 @@
 'use client'
-import { Switch } from '~ui/switch'
 import { SecretKey } from '~lib/types'
 import { maskKey } from '~lib/keys'
 import { switchEnableAuth } from '~actions/api-keys'
@@ -12,27 +11,27 @@ import { toast } from 'sonner'
 
 interface Props {
 	roomId: string
-	enableAuth: boolean
 	pk: string
 	sk: SecretKey[]
 }
 
-export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
+export function APIKeys({ roomId, pk, sk }: Props) {
 	const [disabled, setDisabled] = useState(false)
-
 
 	const handleSwitch = async (value: boolean) => {
 		setDisabled(true)
 
 		const { ok, title, message } = await switchEnableAuth(roomId, value)
 
-		if(ok) toast.success(title, {
-			description: message,
-		})
+		if (ok)
+			toast.success(title, {
+				description: message,
+			})
 
-		if(!ok) toast.error(title, {
-			description: message,
-		})
+		if (!ok)
+			toast.error(title, {
+				description: message,
+			})
 
 		setDisabled(false)
 	}
@@ -45,20 +44,6 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 					<h3 className='text-base font-medium tracking-wide text-foreground'>
 						API Keys
 					</h3>
-					<div className='flex items-center gap-3'>
-						<label
-							htmlFor='enableAuth'
-							className='text-xs font-medium text-muted-foreground'
-						>
-							{enableAuth ? 'Auth Enabled' : 'Auth Disabled'}
-						</label>
-						<Switch
-							id='enableAuth'
-							disabled={disabled}
-							checked={enableAuth}
-							onCheckedChange={handleSwitch}
-						/>
-					</div>
 				</div>
 			</div>
 			<div className='px-6 py-4 grid grid-cols-12 items-center'>
@@ -72,26 +57,25 @@ export function APIKeys({ roomId, enableAuth = false, pk, sk }: Props) {
 					<CopyToClipboard data={pk} />
 				</div>
 			</div>
-			{enableAuth && (
-				<div className='border-t'>
-					<div className='px-6 py-4'>
-						<div className='flex justify-between items-center gap-2'>
-							<p className='text-base font-medium tracking-wide text-foreground'>
-								Secret Keys
-							</p>
 
-							<ShowForm
-								size='xs'
-								roomId={roomId}
-								disabled={sk.length >= MAX_SECRET_KEYS}
-							>
-								New Secret Key
-							</ShowForm>
-						</div>
+			<div className='border-t'>
+				<div className='px-6 py-4'>
+					<div className='flex justify-between items-center gap-2'>
+						<p className='text-base font-medium tracking-wide text-foreground'>
+							Secret Keys
+						</p>
+
+						<ShowForm
+							size='xs'
+							roomId={roomId}
+							disabled={sk.length >= MAX_SECRET_KEYS}
+						>
+							New Secret Key
+						</ShowForm>
 					</div>
-					<SecretKeys secretKeys={sk} roomId={roomId}/>
 				</div>
-			)}
+				<SecretKeys secretKeys={sk} roomId={roomId} />
+			</div>
 		</section>
 	)
 }
