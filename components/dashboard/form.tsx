@@ -39,7 +39,6 @@ const formSchema = object({
 		minLength(3, 'Name must be at least 3 characters long')
 	),
 	description: optional(string()),
-	authentication: boolean(),
 	messagePersistence: boolean(),
 	webhook: boolean(),
 })
@@ -49,7 +48,6 @@ type FormValues = InferInput<typeof formSchema>
 const defaultValues: FormValues = {
 	name: '',
 	description: '',
-	authentication: false,
 	messagePersistence: false,
 	webhook: false,
 }
@@ -156,35 +154,6 @@ export function CreateRoom() {
 								/>
 							</div>
 							<div className='px-6 py-7 space-y-10'>
-								<FormField
-									control={form.control}
-									name='authentication'
-									render={({ field }) => (
-										<FormItem>
-											<div className='flex items-center gap-5 h-full flex-row-reverse'>
-												<FormControl>
-													<Checkbox
-														checked={field.value}
-														onCheckedChange={field.onChange}
-													/>
-												</FormControl>
-												<FormLabel className='min-w-[200px] text-muted-foreground text-sm cursor-pointer'>
-													<div className='flex items-center gap-2'>
-														<Lock className='w-4 h-4' />
-														<p>Authentication</p>
-													</div>
-													<span className='text-muted-foreground/60 text-xs'>
-														Enable room-level authentication,
-														allowing users to secure their rooms
-														with tokens or keys. This ensures that
-														only authorized users can connect and
-														interact with the room.
-													</span>
-												</FormLabel>
-											</div>
-										</FormItem>
-									)}
-								/>
 								<FormField
 									control={form.control}
 									name='messagePersistence'

@@ -12,7 +12,6 @@ import { eq } from 'drizzle-orm'
 interface IValues {
 	name: string
 	description?: string
-	authentication: boolean
 	messagePersistence: boolean
 	webhook: boolean
 }
@@ -36,9 +35,8 @@ export const createRoom = async (
 					slug,
 					userId: user.id,
 					publicKey,
-					saveMessages: values.messagePersistence,
-					enableAuth: values.authentication,
-					enableWebHooks: values.webhook,
+					messagePersistence: values.messagePersistence,
+					webhook: values.webhook,
 				})
 				.returning()
 
