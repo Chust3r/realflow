@@ -3,7 +3,12 @@ import { useEventStore } from '~stores/events'
 import { ScrollArea } from '~ui/scroll-area'
 import { DataTable } from './data-table'
 import { columns } from './columns'
-import { ViewEvent } from './view-event'
+import dynamic from 'next/dynamic'
+
+const ViewEvent = dynamic(() => import('./view-event').then((mod) => mod.ViewEvent), {
+	ssr: false,
+	loading: () => <p>Loading...</p>,
+})
 
 export function Console() {
 	const { events } = useEventStore()
