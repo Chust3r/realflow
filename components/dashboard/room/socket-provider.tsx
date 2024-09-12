@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useContext, createContext } from 'react'
-import { Client } from '~lib/realflow'
+import { Client } from 'realflow-client'
 import { resetEventStore, setPushEvent } from '~stores/events'
 
 interface SocketContext {
