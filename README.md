@@ -16,7 +16,6 @@
 -  [Contributing](#contributing)
 -  [License](#license)
 
-
 ## Features
 
 -  **Custom Channels**: Create channels with authentication, connection limits (_in development_, max limits are customizable in local development), and more.
@@ -24,7 +23,7 @@
 -  **Message Retention**: Save and access historical messages in your channels (_in development_).
 -  **Security**: Credential-based authentication with public and secret keys.
 -  **User-friendly Interface**: Intuitive dashboard for managing and monitoring your channels.
--  **Real-time Communication**: Real-time communication with WebSockets or other protocols contained in [Socket.IO](https://socket.io).
+-  **Real-time Communication**: Implements a real-time communication protocol with native WebSockets.
 -  **Event**: Visualize events in real-time.
 
 ## Technologies
@@ -37,7 +36,7 @@
 -  **Drizzle ORM** (Drizzle ORM is a headless TypeScript ORM with a head)
 -  **Shadcn UI** (Beautifully designed components that you can copy and paste into your apps.)
 -  **Nanostores** (A tiny state manager for React, React Native, Preact, Vue, Svelte, Solid, Lit, Angular, and vanilla JS.)
-- **Socket IO** (Real-time communication with WebSockets or other protocols)
+
 
 ## Requeriments
 
@@ -45,7 +44,7 @@
 -  **Bun v0.2.0 or higher**
 -  **PostgreSQL v14 or higher**
 -  **Visual Studio Code**
-- **RealFlow backend** [required](https://github.com/Chust3r/realflow-back)
+-  **RealFlow backend** [required](https://github.com/Chust3r/realflow-back)
 
 ## Installation
 
@@ -66,7 +65,7 @@
 
    ```
 
-    # AUTH JS 
+    # AUTH JS
 
     AUTH_SECRET=
 
@@ -74,8 +73,8 @@
 
     # AUTH PROVIDERS
 
-    AUTH_GOOGLE_ID = 
-    AUTH_GOOGLE_SECRET = 
+    AUTH_GOOGLE_ID =
+    AUTH_GOOGLE_SECRET =
 
     GITHUB_ID=
     GITHUB_CLIENT_SECRET=
@@ -89,7 +88,7 @@
     MAX_ROOMS = 3
     MAX_CONNECTIONS = 20
     MAX_SECRET_KEYS = 3
-   
+
    ```
 
 4. Run database migrations:
@@ -124,13 +123,11 @@ You can monitor channel usage with detailed metrics in the Realflow dashboard.
 
 div align="center"><img src="./public/images/realflow-dashboard-metrics.png" alt="RealFlow dashboard"/></div>
 
-
 ### Events
 
 Events are visualized in real-time in the Realflow dashboard.
 
 <div align="center"><img src="./public/images/realflow-dashboard-events.png" alt="RealFlow dashboard"/></div>
-
 
 ## Contributing
 
@@ -140,4 +137,4 @@ Events are visualized in real-time in the Realflow dashboard.
 
 ## License
 
-[GPL-3.0 License](https://github.com/Chust3r/realflow/blob/main/LICENSE) 
+[GPL-3.0 License](https://github.com/Chust3r/realflow/blob/main/LICENSE)
