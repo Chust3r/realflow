@@ -1,21 +1,17 @@
 export const code = `
 \`\`\`sh
-npm install socket.io
+npm install realflow-client
 \`\`\`
 `
 
 export const client = `
 \`\`\`ts
-import { io } from "socket.io"
+import { Client } from "realflow-client"
 
-const client = io('${process.env.NEXT_PUBLIC_WS_URL}', {
-				path: '/api/ws',
-                transports:["websocket"],
-				auth: {
-					publicKey:'YOUR_PUBLIC_KEY',
-                    secretKey: 'YOUR_SECRET_KEY',
-                    },
-                })
+const client = new Client("${process.env.NEXT_PUBLIC_WS_URL}",{
+    publicKey: "your_public_key",
+    secretKey: "your_secret_key"
+})
 \`\`\`
 `
 
@@ -28,12 +24,21 @@ client.on("connect", () => {
 client.on("message", (message) => {
     console.log("Received message:", message)
 })
+
+client.on("*",({timestamp,event,payload}) => {
+    console.log("Received event:", event, payload)
+})
 \`\`\`
 `
 export const emit = `
 \`\`\`ts
-client.emit("message", "Hello, server!")
+client.on("connect", () => {
 
-client.emit("custom-event", { foo: "bar" })
+    client.emit("message", "Hello, server!")
+
+    client.emit("other-event", {
+        message: "Hi, client!",
+    })
+})
 \`\`\`
 `

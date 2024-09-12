@@ -1,6 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from '~ui/alert'
 import { CodeBlock } from '~ui/code-block'
-import { code, client, listen, emit} from '~consts/quickstart'
+import { code, client, listen, emit } from '~consts/quickstart'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
@@ -22,8 +22,9 @@ function Page() {
 					</div>
 					<p className='text-muted-foreground text-sm flex-1'>
 						Our application establishes a connection with the Realflow
-						server using Socket.IO for real-time communication, so please
-						ensure you have it installed to get started.
+						server using our native WebSocket library for real-time
+						communication, so please ensure you have it installed to get
+						started.
 					</p>
 				</div>
 				<CodeBlock code={code} />
@@ -34,19 +35,10 @@ function Page() {
 						2
 					</div>
 					<p className='text-muted-foreground text-sm flex-1'>
-						Configure the Socket.IO client to connect to the Realflow
+						Configure the Realflow client to connect to the Realflow
 						platform by specifying the server URL, WebSocket path, and
 						authentication keys as shown below. For more detailed
-						information and advanced usage of Socket.IO, please visit the
-						official Socket.IO{' '}
-						<Link
-							className='underline'
-							href='https://socket.io/'
-							target='_blank'
-						>
-							documentation
-						</Link>
-						.
+						information and advanced usage of the Realflow library.
 					</p>
 				</div>
 				<CodeBlock code={client} />
@@ -57,7 +49,7 @@ function Page() {
 						3
 					</div>
 					<p className='text-muted-foreground text-sm flex-1'>
-						Use the Socket.IO client to listen for events in your room by
+						Use the Realflow client to listen for events in your room by
 						subscribing to specific event names, allowing you to handle
 						incoming messages and updates.
 					</p>
@@ -70,7 +62,7 @@ function Page() {
 						4
 					</div>
 					<p className='text-muted-foreground text-sm flex-1'>
-						Emit events from your Socket.IO client to communicate with
+						Emit events from your Realflow client to communicate with
 						other users or the server by specifying the event name and
 						passing the required data.
 					</p>
@@ -88,4 +80,3 @@ export default Page
 export const metadata: Metadata = {
 	title: 'Quickstart',
 }
-
