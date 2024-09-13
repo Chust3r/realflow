@@ -10,7 +10,7 @@ export const highlightCode = async (code: string) => {
 		.use(remarkRehype)
 		.use(rehypePrettyCode, {
 			keepBackground: false,
-			theme: 'min-dark',
+			theme: 'one-dark-pro',
 		})
 		.use(rehypeStringify)
 		.process(code)

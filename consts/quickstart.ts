@@ -25,8 +25,8 @@ client.on("message", (message) => {
     console.log("Received message:", message)
 })
 
-client.on("*",({timestamp,event,payload}) => {
-    console.log("Received event:", event, payload)
+client.on("*",(data) => {
+    console.log("Received event:", data)
 })
 \`\`\`
 `

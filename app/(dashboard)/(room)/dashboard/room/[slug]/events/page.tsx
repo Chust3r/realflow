@@ -9,8 +9,6 @@ function Page() {
 				<AlertTitle>Events</AlertTitle>
 				<AlertDescription className='text-muted-foreground'>
 					Monitor and track real-time events emitted through your room.
-					Stay informed with live updates on every interaction and activity
-					within your communication network
 				</AlertDescription>
 			</Alert>
 			<Console />
