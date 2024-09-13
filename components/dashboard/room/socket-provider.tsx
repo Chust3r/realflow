@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useContext, createContext } from 'react'
+import { useState, useEffect, useContext, createContext, useRef } from 'react'
 import { Client } from 'realflow-client'
 import { resetEventStore, setPushEvent } from '~stores/events'
 
@@ -25,31 +25,45 @@ interface Props {
 export function SocketProvider({ children, auth }: Props) {
 	const [socket, setSocket] = useState<Client>()
 	const [isConnected, setIsConnected] = useState(false)
-	const [currentConnections, setCurrentConnections] = useState(0)
+	const [connections, setConnections] = useState(0)
+	const socketRef = useRef<Client>()
 
 	useEffect(() => {
-		const s = new Client(process.env.NEXT_PUBLIC_WS_URL!, auth)
+		if (!socketRef.current) {
+			const s = new Client(process.env.NEXT_PUBLIC_WS_URL!, auth)
+			socketRef.current = s
 
-		s.on('connect', () => {
-			setIsConnected(true)
+			s.on('connect', () => {
+				s.on('*', (data) =>
+					setPushEvent({
+						event: data.event,
+						timestamp: data.timestamp,
+						payload: data.payload,
+					})
+				)
+			})
+
+			s.on('connection', ({ payload }) => {
+				setConnections(payload!.connections ?? 0)
+			})
+
+			s.on("disconnection",({payload})=>{
+				setConnections(payload!.connections ?? 0)
+			})
+
+			s.on('disconnect', () => {
+				console.log('disconnected')
+				setIsConnected(false)
+			})
+
 			setSocket(s)
-		})
-
-		s.on('connection', ({ payload }) => {
-			setCurrentConnections(payload!.connections ?? 0)
-		})
-
-		s.on('disconnect', (reason) => {
-			setIsConnected(false)
-		})
-
-		s.on('*', ({ event, timestamp, payload }) => {
-			setPushEvent({ timestamp, event, payload: payload ?? {} })
-		})
+		}
 
 		return () => {
-			s.disconnect()
-			resetEventStore()
+			if (socketRef.current) {
+				socketRef.current.disconnect()
+				resetEventStore()
+			}
 		}
 	}, [])
 
@@ -58,7 +72,7 @@ export function SocketProvider({ children, auth }: Props) {
 			value={{
 				socket,
 				isConnected,
-				currentConnections,
+				currentConnections: connections,
 			}}
 		>
 			{children}
