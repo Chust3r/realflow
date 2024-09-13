@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useContext, createContext, useRef } from 'react'
-import { Client } from 'realflow-client'
+import { Client } from '~lib/realflow-client'
 import { resetEventStore, setPushEvent } from '~stores/events'
 
 interface SocketContext {
@@ -34,6 +34,7 @@ export function SocketProvider({ children, auth }: Props) {
 			socketRef.current = s
 
 			s.on('connect', () => {
+				setIsConnected(true)
 				s.on('*', (data) =>
 					setPushEvent({
 						event: data.event,
@@ -47,12 +48,11 @@ export function SocketProvider({ children, auth }: Props) {
 				setConnections(payload!.connections ?? 0)
 			})
 
-			s.on("disconnection",({payload})=>{
+			s.on('disconnection', ({ payload }) => {
 				setConnections(payload!.connections ?? 0)
 			})
 
 			s.on('disconnect', () => {
-				console.log('disconnected')
 				setIsConnected(false)
 			})
 
@@ -63,9 +63,10 @@ export function SocketProvider({ children, auth }: Props) {
 			if (socketRef.current) {
 				socketRef.current.disconnect()
 				resetEventStore()
+				socketRef.current = undefined
 			}
 		}
-	}, [])
+	}, [auth])
 
 	return (
 		<SocketContext.Provider
