@@ -13,6 +13,7 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.4.2",
     "@auth/prisma-adapter": "^2.4.1",
+    "@chust3r/websocket-client": "1.0.4",
     "@hookform/resolvers": "^3.9.0",
     "@nanostores/react": "^0.7.3",
     "@prisma/adapter-pg": "^5.17.0",

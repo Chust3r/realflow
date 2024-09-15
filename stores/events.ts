@@ -4,7 +4,7 @@ import { map } from 'nanostores'
 export type Event = {
 	timestamp: string
 	event: string
-	payload: any
+	data?: any
 }
 interface EventStore {
 	events: Event[]

@@ -1,10 +1,10 @@
 'use client'
 import { useState, useEffect, useContext, createContext, useRef } from 'react'
-import { Client } from '~lib/realflow-client'
+import { WebSocketClient } from '@chust3r/websocket-client'
 import { resetEventStore, setPushEvent } from '~stores/events'
 
 interface SocketContext {
-	socket?: Client
+	socket?: WebSocketClient
 	isConnected: boolean
 	currentConnections: number
 }
@@ -23,33 +23,36 @@ interface Props {
 }
 
 export function SocketProvider({ children, auth }: Props) {
-	const [socket, setSocket] = useState<Client>()
+	const [socket, setSocket] = useState<WebSocketClient>()
 	const [isConnected, setIsConnected] = useState(false)
 	const [connections, setConnections] = useState(0)
-	const socketRef = useRef<Client>()
+	const socketRef = useRef<WebSocketClient>()
 
 	useEffect(() => {
 		if (!socketRef.current) {
-			const s = new Client(process.env.NEXT_PUBLIC_WS_URL!, auth)
+			const s = new WebSocketClient(process.env.NEXT_PUBLIC_WS_URL!, {
+				query: auth,
+				useCompression: true,
+			})
 			socketRef.current = s
 
 			s.on('connect', () => {
 				setIsConnected(true)
-				s.on('*', (data) =>
+				s.onAny(({ event, timestamp, data }) =>
 					setPushEvent({
-						event: data.event,
-						timestamp: data.timestamp,
-						payload: data.payload,
+						event,
+						timestamp,
+						data,
 					})
 				)
 			})
 
-			s.on('connection', ({ payload }) => {
-				setConnections(payload!.connections ?? 0)
+			s.on('connection', ({ data }) => {
+				setConnections(data!.connections ?? 0)
 			})
 
-			s.on('disconnection', ({ payload }) => {
-				setConnections(payload!.connections ?? 0)
+			s.on('disconnection', ({ data }) => {
+				setConnections(data!.connections ?? 0)
 			})
 
 			s.on('disconnect', () => {
