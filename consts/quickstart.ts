@@ -1,42 +1,45 @@
 export const code = `
 \`\`\`sh
-npm install realflow-client
+npm install @chust3r/websocket-client
 \`\`\`
 `
 
 export const client = `
 \`\`\`ts
-import { Client } from "realflow-client"
+import { WebSocketClient } from "@chust3r/websocket-client"
 
-const client = new Client("${process.env.NEXT_PUBLIC_WS_URL}",{
-    publicKey: "your_public_key",
-    secretKey: "your_secret_key"
+const ws = new WebSocketClient("${process.env.NEXT_PUBLIC_WS_URL}",{
+    useCompression: true,
+    query: {
+        publicKey: "your_public_key",
+        secretKey: "your_secret_key"
+    }
 })
 \`\`\`
 `
 
 export const listen = `
 \`\`\`ts
-client.on("connect", () => {
+ws.on("connect", () => {
     console.log("Connected to server")
 })
 
-client.on("message", (message) => {
-    console.log("Received message:", message)
+ws.on("message", ({event, timestamp, data}) => {
+    console.log("Received message:", data)
 })
 
-client.on("*",(data) => {
-    console.log("Received event:", data)
+ws.onAny(({event, timestamp, data}) => {
+    console.log("Received event:", event)
 })
 \`\`\`
 `
 export const emit = `
 \`\`\`ts
-client.on("connect", () => {
+ws.on("connect", () => {
 
-    client.emit("message", "Hello, server!")
+    ws.emit("message", "Hello, server!")
 
-    client.emit("other-event", {
+    ws.emit("other-event", {
         message: "Hi, client!",
     })
 })
