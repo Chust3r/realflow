@@ -3,6 +3,8 @@ import { Card, CardContent } from '~ui/card'
 import {
 	ChartConfig,
 	ChartContainer,
+	ChartLegend,
+	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
 } from '~ui/chart'
@@ -28,6 +30,8 @@ interface Props {
 	total: number
 }
 
+export const description = 'Chart with request source overview'
+
 export function MetricsOrigin({ data = [], total = 0 }: Props) {
 	return (
 		<Card>
@@ -47,22 +51,19 @@ export function MetricsOrigin({ data = [], total = 0 }: Props) {
 					<BarChart
 						accessibilityLayer
 						data={data}
-						layout='vertical'
 						margin={{
 							right: 16,
 						}}
 					>
-						<CartesianGrid vertical={false} strokeDasharray={'3 3'}/>
-						<YAxis
-							dataKey='address'
+						<CartesianGrid vertical={false} strokeDasharray={'3 3'} />
+						<XAxis
+							dataKey='origin'
 							type='category'
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
-							tickFormatter={(value) => value.slice(0, 3)}
-							hide
 						/>
-						<XAxis
+						<YAxis
 							dataKey='total'
 							type='number'
 							tickLine={false}
@@ -72,26 +73,21 @@ export function MetricsOrigin({ data = [], total = 0 }: Props) {
 						/>
 						<Bar
 							dataKey='authorized'
-							layout='vertical'
 							fill='var(--color-authorized)'
-							radius={4}
-							stackId='a'
+							radius={5}
 							opacity={0.8}
 						></Bar>
 						<Bar
 							dataKey='unauthorized'
-							layout='vertical'
 							fill='var(--color-unauthorized)'
-							stackId='a'
-							radius={[0, 4, 4, 0]}
-							opacity={0.5}
+							radius={5}
+							opacity={0.8}
 						></Bar>
 						<ChartTooltip
 							cursor={false}
-							content={
-								<ChartTooltipContent indicator='line' cursor={false} />
-							}
+							content={<ChartTooltipContent indicator='dot' />}
 						/>
+						<ChartLegend content={<ChartLegendContent />} />
 					</BarChart>
 				</ChartContainer>
 			</CardContent>

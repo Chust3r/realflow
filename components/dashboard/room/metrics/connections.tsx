@@ -77,7 +77,7 @@ export function MetricsConnections({ data = [] }: Props) {
 							content={
 								<ChartTooltipContent
 									labelFormatter={(value) =>
-										formatDate(new Date(value), 'MMM dd')
+										formatDate(new Date(value), 'MMMM dd')
 									}
 									indicator='dot'
 								/>

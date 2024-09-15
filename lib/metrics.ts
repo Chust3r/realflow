@@ -106,7 +106,7 @@ export const getMessages = async (roomId: string) => {
 export const getOrigins = async (roomId: string) => {
 	const query = sql`
     SELECT
-        "rq"."address",
+        "rq"."origin",
     CAST(COUNT("rq"."id") AS INTEGER) total,
     CAST(SUM(
         CASE
@@ -126,7 +126,7 @@ export const getOrigins = async (roomId: string) => {
     WHERE
     "roomId" = ${roomId}
     GROUP BY
-        "rq"."address"
+        "rq"."origin"
     ORDER BY authorized DESC
     `
 

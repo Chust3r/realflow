@@ -35,7 +35,7 @@ export function MetricsMessages({ data = [], total = 0 }: Props) {
 							Stored Messages
 						</h2>
 					</div>
-					<h3 className='text-xl font-medium'>{total}</h3>
+					<h3 className='text-xl font-medium'>{total} / 100</h3>
 				</div>
 				<ChartContainer
 					config={config}
