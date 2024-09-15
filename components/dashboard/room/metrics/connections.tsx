@@ -29,7 +29,7 @@ export function MetricsConnections({ data = [] }: Props) {
 
 	return (
 		<Card>
-			<CardContent className='px-2 pt-4 sm:px-6 sm:pt-6 bg-accent/5'>
+			<CardContent className='px-2 pt-4 sm:px-6 sm:pt-6 dark:bg-accent/5'>
 				<div className='flex flex-col gap-1 py-3'>
 					<div className='flex items-center gap-1'>
 						<h2 className='text-muted-foreground text-sm'>
@@ -53,7 +53,7 @@ export function MetricsConnections({ data = [] }: Props) {
 							radius={5}
 							opacity={0.8}
 						/>
-						<CartesianGrid vertical={false} />
+						<CartesianGrid vertical={false} strokeDasharray={'3 3'}/>
 						<XAxis
 							dataKey='date'
 							tickLine={false}

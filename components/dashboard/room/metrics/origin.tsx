@@ -31,7 +31,7 @@ interface Props {
 export function MetricsOrigin({ data = [], total = 0 }: Props) {
 	return (
 		<Card>
-			<CardContent className='px-2 pt-4 sm:px-6 sm:pt-6 bg-accent/5'>
+			<CardContent className='px-2 pt-4 sm:px-6 sm:pt-6 dark:bg-accent/5'>
 				<div className='flex flex-col gap-1 py-3'>
 					<div className='flex items-center gap-1'>
 						<h2 className='text-muted-foreground text-sm'>
@@ -52,7 +52,7 @@ export function MetricsOrigin({ data = [], total = 0 }: Props) {
 							right: 16,
 						}}
 					>
-						<CartesianGrid horizontal={false} />
+						<CartesianGrid vertical={false} strokeDasharray={'3 3'}/>
 						<YAxis
 							dataKey='address'
 							type='category'
